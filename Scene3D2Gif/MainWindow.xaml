@@ -1,0 +1,28 @@
+﻿<Window x:Class="Scene3D2Gif.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Scene3D2Gif"
+        mc:Ignorable="d"
+        xmlns:h="http://helix-toolkit.org/wpf"
+        Title="3D Scene To Gif Converter" Height="450" Width="800" Icon="res/bunny.ico">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <ToolBar x:Name="toolBar" VerticalAlignment="Top">
+            <Button Content="Exit" FontSize="12" Margin="4" Padding="4" Command="local:AppCommands.ApplicationCloseCommand">
+            </Button>
+        </ToolBar>
+
+        <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" >
+            <h:DefaultLights/>
+            <!-- h:SunLight/ -->
+        </h:HelixViewport3D>
+
+    </Grid>
+</Window>
