@@ -22,6 +22,8 @@ namespace Scene3D2Gif
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MeshGeometry3D textGeometry;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,10 +31,35 @@ namespace Scene3D2Gif
             ModelVisual3D device = new ModelVisual3D();
             //string path = @"..\..\..\..\_obj\taeyeon_a.obj";                  //not visible...
             //string path = @"d:\projects\Scene3D2Gif\_obj\bunny\bunny.obj";    //works
-            string path = @"d:\projects\Scene3D2Gif\_obj\lea\lea.obj";          //works
+            //string path = @"d:\projects\Scene3D2Gif\_obj\lea\lea.obj";          //works
             //string path = @"..\..\..\..\_obj\bunny\taeyeon_test.obj";
+            string path = @"res/DinoRider.3ds";
             device.Content = getModel(path);
             this.helixViewport3D.Children.Add(device);
+
+            {
+                var builder = new MeshBuilder(false, false);
+                builder.ExtrudeText(
+                    "Helix Toolkit",
+                    "Arial",
+                    FontStyles.Normal,
+                    FontWeights.Bold,
+                    2,
+                    new Vector3D(-1, 0, 0), //text direction
+                    new Point3D(0, 0, 0),
+                    new Point3D(0, 0, 1));
+
+                this.textGeometry = builder.ToMesh(true);
+                PointCollection pc = this.textGeometry.TextureCoordinates;
+                this.DataContext = this;
+            }
+        }
+        public MeshGeometry3D TextGeometry
+        {
+            get
+            {
+                return this.textGeometry;
+            }
         }
 
         public Model3D getModel(string path)
