@@ -4,18 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C1570B1B-1F16-4012-AA6A-7A2CC0B8D04D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Scene3D2Gif</RootNamespace>
-    <AssemblyName>Scene3D2Gif</AssemblyName>
+    <ProjectGuid>{5F9394BC-F04C-401D-9961-7938678E2F06}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Scene3DLib</RootNamespace>
+    <AssemblyName>Scene3DLib</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,35 +32,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="3DTools">
-      <HintPath>Components\3DTools.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\3DTools.dll</HintPath>
     </Reference>
-    <Reference Include="HelixToolkit, Version=2.3.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
-      <HintPath>..\packages\HelixToolkit.2.3.0\lib\netstandard1.1\HelixToolkit.dll</HintPath>
+    <Reference Include="HelixToolkit">
+      <HintPath>..\Scene3D2Gif\Components\HelixToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="HelixToolkit.Wpf, Version=2.3.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
-      <HintPath>..\packages\HelixToolkit.Wpf.2.3.0\lib\net45\HelixToolkit.Wpf.dll</HintPath>
+    <Reference Include="HelixToolkit.Wpf">
+      <HintPath>..\Scene3D2Gif\Components\HelixToolkit.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="HelixToolkit.Wpf.Input">
-      <HintPath>Components\HelixToolkit.Wpf.Input.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\HelixToolkit.Wpf.Input.dll</HintPath>
     </Reference>
     <Reference Include="NAudio">
-      <HintPath>Components\NAudio.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="Petzold.Media3D">
-      <HintPath>Components\Petzold.Media3D.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\Petzold.Media3D.dll</HintPath>
     </Reference>
     <Reference Include="PropertyTools">
-      <HintPath>Components\PropertyTools.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\PropertyTools.dll</HintPath>
     </Reference>
     <Reference Include="PropertyTools.Wpf">
-      <HintPath>Components\PropertyTools.Wpf.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\PropertyTools.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-    <Reference Include="System.Windows.Interactivity">
-      <HintPath>Components\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,35 +67,33 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="TDx.TDxInput">
-      <HintPath>Components\TDx.TDxInput.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\TDx.TDxInput.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Triangle">
-      <HintPath>Components\Triangle.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\Triangle.dll</HintPath>
     </Reference>
     <Reference Include="WiimoteLib">
-      <HintPath>Components\WiimoteLib.dll</HintPath>
+      <HintPath>..\Scene3D2Gif\Components\WiimoteLib.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Compile Include="Scene3DButton.xaml.cs">
+      <DependentUpon>Scene3DButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scene3DText.cs" />
+    <Page Include="Scene3DButton.xaml">
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AppCommands.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Scene3DControl.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -124,23 +115,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="res\bunny.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Scene3DLib\Scene3DLib.csproj">
-      <Project>{5f9394bc-f04c-401d-9961-7938678e2f06}</Project>
-      <Name>Scene3DLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

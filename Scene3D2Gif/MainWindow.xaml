@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         xmlns:h="http://helix-toolkit.org/wpf"
         xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+        xmlns:scene3DLib="clr-namespace:Scene3DLib;assembly=Scene3DLib"
         Title="3D Scene To Gif Converter" Height="450" Width="800" Icon="res/bunny.ico">
     
     <Grid>
@@ -16,12 +17,16 @@
         </Grid.RowDefinitions>
         
         <ToolBar x:Name="toolBar" VerticalAlignment="Top">
-            <Button FontSize="12" Margin="4" Padding="4" Command="local:AppCommands.ApplicationCloseCommand">
+
+            <scene3DLib:Scene3DButton Scene3DText="Exit!!!" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
+            </scene3DLib:Scene3DButton>
+
+            <!-- Button FontSize="12" Margin="4" Padding="4" Command="local:AppCommands.ApplicationCloseCommand">
                 <helix:HelixViewport3D x:Name="helixViewport3D_ExitButton" ZoomExtentsWhenLoaded="False" ShowCameraInfo="False" ShowCoordinateSystem="False" ShowCameraTarget="False" ShowFieldOfView="False" ShowViewCube="False" Width="99" Height="33">
                     <h:DefaultLights/>
                     <helix:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="Red" />
                 </helix:HelixViewport3D>
-            </Button>
+            </Button -->
         </ToolBar>
 
         <helix:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="True" ShowCameraInfo="True">
