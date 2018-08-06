@@ -24,6 +24,9 @@
             <scene3DLib:Scene3DButton Scene3DText="Exit 2 !" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
             </scene3DLib:Scene3DButton>
 
+            <scene3DLib:Scene3DButton Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
+            </scene3DLib:Scene3DButton>
+
             <!-- Button FontSize="12" Margin="4" Padding="4" Command="local:AppCommands.ApplicationCloseCommand">
                 <helix:HelixViewport3D x:Name="helixViewport3D_ExitButton" ZoomExtentsWhenLoaded="False" ShowCameraInfo="False" ShowCoordinateSystem="False" ShowCameraTarget="False" ShowFieldOfView="False" ShowViewCube="False" Width="99" Height="33">
                     <h:DefaultLights/>

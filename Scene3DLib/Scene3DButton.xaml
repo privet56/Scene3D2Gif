@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button FontSize="12" Margin="4" Padding="4" Command="{Binding Scene3DCmd}" Background="Transparent" BorderThickness="0"> <!-- Content="{Binding Scene3DText}" -->
+        <Button FontSize="12" Margin="4" Padding="4" Command="{Binding Scene3DCmd}" Background="Transparent" BorderThickness="0" ToolTip="{Binding Scene3DText}"> <!-- Content="{Binding Scene3DText}" -->
             <h:HelixViewport3D
                     x:Name="viewport"
                     ZoomExtentsWhenLoaded="False"
@@ -17,7 +17,7 @@
                     ShowCameraTarget="False"
                     ShowFieldOfView="False"
                     ShowViewCube="False"
-                    Width="99" Height="33"
+                    Width="66" Height="33"
                 >
                 
                 <h:DefaultLights/>

@@ -101,6 +101,8 @@ namespace Scene3DLib
 
         protected void buildTextGeometry()
         {
+            if (String.IsNullOrWhiteSpace(this.Scene3DText)) return;
+
             var builder = new HelixToolkit.Wpf.MeshBuilder(false, false);
             Debug.WriteLine("<<<buildTextGeometry:" + this.Scene3DText + ">>>");
             builder.ExtrudeText(
@@ -125,14 +127,13 @@ namespace Scene3DLib
             viewport.Camera.Position = pos;
 
             {
-                ItemsModel3DTransform = CreateAnimatedTransform1(new Media3D.Transform3DGroup(), new Vector3D(0, 0, -1), new Vector3D(0.1, 0, 0));
+                ItemsModel3DTransform = CreateAnimatedTransform1(new Media3D.Transform3DGroup(), new Vector3D(3, 0, 0), new Vector3D(0.1, 0, 0));
                 //OnPropertyChanged(nameof(ItemsModel3DTransform));
             }
         }
 
         private static Media3D.Transform3D CreateAnimatedTransform1(Media3D.Transform3DGroup transformGroup, Media3D.Vector3D center, Media3D.Vector3D axis, double speed = 4)
         {
-
             var rotateAnimation = new Rotation3DAnimation
             {
                 RepeatBehavior = RepeatBehavior.Forever,
