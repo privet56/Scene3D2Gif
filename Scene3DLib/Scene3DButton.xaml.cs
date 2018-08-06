@@ -18,6 +18,11 @@ using System.Windows.Shapes;
 
 using System.Diagnostics;
 
+using HelixToolkit.Wpf.SharpDX;
+using System.Windows.Media.Animation;
+
+using Media3D = System.Windows.Media.Media3D;
+
 namespace Scene3DLib
 {
     /// <summary>
@@ -33,7 +38,7 @@ namespace Scene3DLib
 
         public static readonly DependencyProperty Scene3DTextGeometryProperty =
          DependencyProperty.Register("Scene3DTextGeometry",
-         typeof(MeshGeometry3D),
+         typeof(System.Windows.Media.Media3D.MeshGeometry3D),
          typeof(Scene3DButton),
          new UIPropertyMetadata(null));
 
@@ -42,6 +47,8 @@ namespace Scene3DLib
          typeof(ICommand),
          typeof(Scene3DButton),
          new UIPropertyMetadata(null));
+
+        public Transform3D ItemsModel3DTransform { private set; get; } = new Media3D.TranslateTransform3D(0, 0, 5);
 
         static Scene3DButton()
         {
@@ -66,9 +73,9 @@ namespace Scene3DLib
                 this.buildTextGeometry();
             }
         }
-        public MeshGeometry3D Scene3DTextGeometry
+        public System.Windows.Media.Media3D.MeshGeometry3D Scene3DTextGeometry
         {
-            get => (MeshGeometry3D)GetValue(Scene3DTextGeometryProperty);
+            get => (System.Windows.Media.Media3D.MeshGeometry3D)GetValue(Scene3DTextGeometryProperty);
             set
             {
                 SetValue(Scene3DTextGeometryProperty, value);
@@ -94,7 +101,7 @@ namespace Scene3DLib
 
         protected void buildTextGeometry()
         {
-            var builder = new MeshBuilder(false, false);
+            var builder = new HelixToolkit.Wpf.MeshBuilder(false, false);
             Debug.WriteLine("<<<buildTextGeometry:" + this.Scene3DText + ">>>");
             builder.ExtrudeText(
                 this.Scene3DText,
@@ -104,10 +111,58 @@ namespace Scene3DLib
                 2,
                 new Vector3D(-1, 0, 0), //text direction
                 new Point3D(0, 0, 0),
-                new Point3D(0, 0, 1));
+                new Point3D(0, 0, 0.001));
 
             this.Scene3DTextGeometry = builder.ToMesh(true);
             PointCollection pc = this.Scene3DTextGeometry.TextureCoordinates;
+
+            Point3D pos = this.viewport.Camera.Position;
+
+            pos.X -= (this.Scene3DText.Length / 2);//=move cam to the right!
+            //pos.Z -= 3;//move cam downwards
+            pos.Z -= 5;
+            pos.Y -= 3;
+            viewport.Camera.Position = pos;
+
+            {
+                ItemsModel3DTransform = CreateAnimatedTransform1(new Media3D.Transform3DGroup(), new Vector3D(0, 0, -1), new Vector3D(0.1, 0, 0));
+                //OnPropertyChanged(nameof(ItemsModel3DTransform));
+            }
+        }
+
+        private static Media3D.Transform3D CreateAnimatedTransform1(Media3D.Transform3DGroup transformGroup, Media3D.Vector3D center, Media3D.Vector3D axis, double speed = 4)
+        {
+
+            var rotateAnimation = new Rotation3DAnimation
+            {
+                RepeatBehavior = RepeatBehavior.Forever,
+                By = new Media3D.AxisAngleRotation3D(axis, 90),
+                Duration = TimeSpan.FromSeconds(speed / 2),
+                IsCumulative = true,
+            };
+
+            var rotateTransform = new Media3D.RotateTransform3D();
+            rotateTransform.BeginAnimation(Media3D.RotateTransform3D.RotationProperty, rotateAnimation);
+
+            transformGroup.Children.Add(rotateTransform);
+
+            var rotateAnimation1 = new Rotation3DAnimation
+            {
+                RepeatBehavior = RepeatBehavior.Forever,
+                By = new Media3D.AxisAngleRotation3D(axis, 240),
+                Duration = TimeSpan.FromSeconds(speed / 4),
+                IsCumulative = true,
+            };
+
+            var rotateTransform1 = new Media3D.RotateTransform3D();
+            rotateTransform1.CenterX = center.X;
+            rotateTransform1.CenterY = center.Y;
+            rotateTransform1.CenterZ = center.Z;
+            rotateTransform1.BeginAnimation(Media3D.RotateTransform3D.RotationProperty, rotateAnimation1);
+
+            transformGroup.Children.Add(rotateTransform1);
+
+            return transformGroup;
         }
     }
 }
