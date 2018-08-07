@@ -35,9 +35,9 @@ namespace Scene3D2Gif
 
         public MainWindow()
         {
+            Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
             InitializeComponent();
             this.DataContext = this;
-            Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
         }
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
         {
@@ -59,7 +59,36 @@ namespace Scene3D2Gif
         }
         public void OnInsertAgain(string scene3DModelObj)
         {
-            MessageBox.Show("oops I did it again("+ scene3DModelObj + ")!");
+            var _previousCursor = Mouse.OverrideCursor;
+            Mouse.OverrideCursor = Cursors.Wait;
+
+            ModelVisual3D device = new ModelVisual3D();
+            device.Content = Scene3DLib.Scene3D.getModel(scene3DModelObj);
+            this.helixViewport3D.Children.Add(device);
+            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(scene3DModelObj, new ActionCommand(action => OnInsertAgain(scene3DModelObj), canExecute => true));
+            Scene3DEles.Add(scene3DModel);
+
+            {
+                //< ht:BindableTranslateManipulator Direction = "1 0 0"  Length = "5" Diameter = "1" Color = "Black" Value = "{Binding TranslateValue}" TargetTransform = "{Binding ElementName=sphere1, Path=Transform}" />
+                /*
+                BindableTranslateManipulator b = new BindableTranslateManipulator();
+                b.Direction = new Vector3D(1,0,0);
+                b.Length = 5;
+                b.Diameter = 1;
+                b.Color = Colors.Black;
+                b.Value = 3.3;
+                b.TargetTransform = device.Transform;
+                this.helixViewport3D.Children.Add(b);
+                */
+                TranslateManipulator manipulator = new TranslateManipulator();
+                manipulator.Bind(device);
+                manipulator.Color = Colors.Red;
+                manipulator.Direction = new Vector3D(1, 0, 0);
+                manipulator.Diameter = 0.1;
+                this.helixViewport3D.Children.Add(manipulator);
+            }
+
+            Mouse.OverrideCursor = _previousCursor;
         }
         public void OnInsert()
         {
@@ -76,15 +105,8 @@ namespace Scene3D2Gif
                 Debug.WriteLine("!openFileDialog.ShowDialog()");
                 return;
             }
-            var _previousCursor = Mouse.OverrideCursor;
-            Mouse.OverrideCursor = Cursors.Wait;
 
-            ModelVisual3D device = new ModelVisual3D();
-            device.Content = Scene3DLib.Scene3D.getModel(openFileDialog.FileName);
-            this.helixViewport3D.Children.Add(device);
-            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(openFileDialog.FileName, new ActionCommand(action => OnInsertAgain(openFileDialog.FileName), canExecute => true));
-            Scene3DEles.Add(scene3DModel);
-            Mouse.OverrideCursor = _previousCursor;
+            OnInsertAgain(openFileDialog.FileName);
         }
     }
 }
