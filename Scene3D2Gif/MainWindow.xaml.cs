@@ -57,6 +57,14 @@ namespace Scene3D2Gif
                 return new ActionCommand(action => OnInsert(), canExecute => true);
             }
         }
+        public ICommand ScreenshotCommand
+        {
+            get
+            {
+                return new ActionCommand(action => OnScreenshot(), canExecute => true);
+            }
+        }
+
         public void OnInsertAgain(string scene3DModelObj)
         {
             var _previousCursor = Mouse.OverrideCursor;
@@ -70,16 +78,6 @@ namespace Scene3D2Gif
 
             {
                 //< ht:BindableTranslateManipulator Direction = "1 0 0"  Length = "5" Diameter = "1" Color = "Black" Value = "{Binding TranslateValue}" TargetTransform = "{Binding ElementName=sphere1, Path=Transform}" />
-                /*
-                BindableTranslateManipulator b = new BindableTranslateManipulator();
-                b.Direction = new Vector3D(1,0,0);
-                b.Length = 5;
-                b.Diameter = 1;
-                b.Color = Colors.Black;
-                b.Value = 3.3;
-                b.TargetTransform = device.Transform;
-                this.helixViewport3D.Children.Add(b);
-                */
                 TranslateManipulator manipulator = new TranslateManipulator();
                 manipulator.Bind(device);
                 manipulator.Color = Colors.Red;
@@ -90,6 +88,13 @@ namespace Scene3D2Gif
             }
 
             Mouse.OverrideCursor = _previousCursor;
+        }
+        public void OnScreenshot()
+        {
+            //TODO: remove grid before screenshot
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)this.helixViewport3D.ActualWidth, (int)this.helixViewport3D.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(this.helixViewport3D);
+            Clipboard.SetImage(rtb);
         }
         public void OnInsert()
         {

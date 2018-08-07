@@ -19,18 +19,14 @@
         
         <ToolBar x:Name="toolBar" VerticalAlignment="Top">
 
-            <scene3DLib:Scene3DButton Scene3DText="Insert!" Scene3DCmd="{Binding InsertCommand,
-                RelativeSource={RelativeSource FindAncestor,
-                AncestorType={x:Type Window}}, FallbackValue=False}">
-            </scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DText="Exit!" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
-            </scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
-            </scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Insert!" Scene3DCmd="{Binding InsertCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Screenshot" Scene3DCmd="{Binding ScreenshotCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Exit!" Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj" Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
 
-            <!-- TODO: ani! -->
             <ItemsControl ItemsSource="{Binding Scene3DEles}" Name="scene3DEles">
 
+                <!-- TODO: ani only new added ele! -->
                 <!-- add ani begin -->
                 <ItemsControl.RenderTransform>
                     <TransformGroup>
