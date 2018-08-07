@@ -22,6 +22,7 @@ using HelixToolkit.Wpf.SharpDX;
 using System.Windows.Media.Animation;
 
 using Media3D = System.Windows.Media.Media3D;
+using System.Reflection;
 
 namespace Scene3DLib
 {
@@ -90,6 +91,16 @@ namespace Scene3DLib
             transformGroup.Children.Add(rotateTransform1);
 
             return transformGroup;
+        }
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return System.IO.Path.GetDirectoryName(path);
+            }
         }
     }
 }

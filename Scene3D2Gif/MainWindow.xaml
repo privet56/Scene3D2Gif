@@ -39,7 +39,7 @@
         <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="True" ShowCameraInfo="True">
             <h:DefaultLights/>
             <!-- h:SunLight/ -->
-            <h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" />
+            <!-- h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" / -->
         </h:HelixViewport3D>
 
     </Grid>

@@ -1,4 +1,5 @@
 ﻿using HelixToolkit.Wpf;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Media3D = System.Windows.Media.Media3D;
+using System.Diagnostics;
 
 namespace Scene3D2Gif
 {
@@ -22,12 +25,12 @@ namespace Scene3D2Gif
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MeshGeometry3D textGeometry;
+        //private MeshGeometry3D textGeometry;
 
         public MainWindow()
         {
             InitializeComponent();
-
+            /*
             ModelVisual3D device = new ModelVisual3D();
             //string path = @"..\..\..\..\_obj\taeyeon_a.obj";                  //not visible...
             //string path = @"d:\projects\Scene3D2Gif\_obj\bunny\bunny.obj";    //works
@@ -51,8 +54,9 @@ namespace Scene3D2Gif
 
                 this.textGeometry = builder.ToMesh(true);
                 PointCollection pc = this.textGeometry.TextureCoordinates;
-                this.DataContext = this;
             }
+            this.DataContext = this;
+            */
         }
         public ICommand InsertCommand
         {
@@ -60,17 +64,33 @@ namespace Scene3D2Gif
             {
                 return new ActionCommand(action => OnInsert(), canExecute => true);
             }
-        }
+        }/*
         public MeshGeometry3D TextGeometry
         {
             get
             {
                 return this.textGeometry;
             }
-        }
+        }*/
         public void OnInsert()
         {
-            MessageBox.Show("OnInsert");
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = Scene3DLib.Scene3D.AssemblyDirectory;
+            openFileDialog.Filter = "obj files (*.obj)|*.obj|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+            Nullable<bool> r = openFileDialog.ShowDialog();
+
+            if (r != true)
+            {
+                Debug.WriteLine("!openFileDialog.ShowDialog()");
+                return;
+            }
+
+            ModelVisual3D device = new ModelVisual3D();
+            device.Content = Scene3DLib.Scene3D.getModel(openFileDialog.FileName);
+            this.helixViewport3D.Children.Add(device);
         }
     }
 }
