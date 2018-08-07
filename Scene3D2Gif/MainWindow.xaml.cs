@@ -85,6 +85,7 @@ namespace Scene3D2Gif
                 manipulator.Color = Colors.Red;
                 manipulator.Direction = new Vector3D(1, 0, 0);
                 manipulator.Diameter = 0.1;
+                manipulator.Length = 9;//TODO: len = obj-len * 2
                 this.helixViewport3D.Children.Add(manipulator);
             }
 

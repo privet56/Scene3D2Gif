@@ -78,7 +78,7 @@
             </Button -->
         </ToolBar>
 
-        <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="True" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}">
+        <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="True" ShowCameraInfo="False" Background="{h:LinearGradientBrush Gray, White}">
             <h:DefaultLights/>
             <h:GridLinesVisual3D/>
             <h:HelixViewport3D.DefaultCamera>
