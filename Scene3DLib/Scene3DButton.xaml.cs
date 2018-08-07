@@ -34,7 +34,13 @@ namespace Scene3DLib
          DependencyProperty.Register("Scene3DText",
          typeof(string),
          typeof(Scene3DButton),
-         new UIPropertyMetadata(" "));
+         new UIPropertyMetadata(null));
+
+        public static readonly DependencyProperty Scene3DObjProperty =
+         DependencyProperty.Register("Scene3DObj",
+         typeof(string),
+         typeof(Scene3DButton),
+         new UIPropertyMetadata(null));
 
         public static readonly DependencyProperty Scene3DTextGeometryProperty =
          DependencyProperty.Register("Scene3DTextGeometry",
@@ -71,6 +77,18 @@ namespace Scene3DLib
             {
                 SetValue(Scene3DTextProperty, value);
                 this.buildTextGeometry();
+            }
+        }
+        public string Scene3DObj
+        {
+            get
+            {
+                string v = (string)GetValue(Scene3DObjProperty);
+                return v;
+            }
+            set
+            {
+                SetValue(Scene3DObjProperty, value);
             }
         }
         public System.Windows.Media.Media3D.MeshGeometry3D Scene3DTextGeometry

@@ -125,6 +125,7 @@ namespace Scene3D2Gif
 
         public static IEnumerable<IList<Point[]>> GetTextOutlines(string text, string fontName, FontStyle fontStyle, FontWeight fontWeight, double fontSize)
         {
+#pragma warning disable CS0618 // Typ oder Element ist veraltet
             var formattedText = new FormattedText(
                 text,
                 CultureInfo.CurrentCulture,
@@ -132,6 +133,7 @@ namespace Scene3D2Gif
                 new Typeface(new FontFamily(fontName), fontStyle, fontWeight, FontStretches.Normal),
                 fontSize,
                 Brushes.Black);
+#pragma warning restore CS0618 // Typ oder Element ist veraltet
 
             var textGeometry = formattedText.BuildGeometry(new Point(0, 0));
             var outlines = new List<List<Point[]>>();
