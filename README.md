@@ -10,7 +10,7 @@
 	.NET Framework 4.7.2 Developer Pack
 
 ## NuGet Packages:
-	Install-Package HelixToolkit.Wpf
+	Install-Package HelixToolkit, HelixToolkit.Wpf, HelixToolkit.Wpf.SharpDX
 
 ## TODO:
 	Impl 3D button as resource lib
