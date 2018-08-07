@@ -1,6 +1,7 @@
 ﻿using HelixToolkit.Wpf;
 using Scene3D2Gif;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ using HelixToolkit.Wpf.SharpDX;
 using System.Windows.Media.Animation;
 
 using Media3D = System.Windows.Media.Media3D;
+using System.ComponentModel;
 
 namespace Scene3DLib
 {
@@ -30,6 +32,12 @@ namespace Scene3DLib
     /// </summary>
     public partial class Scene3DButton : UserControl
     {
+        public static readonly DependencyProperty Scene3DTooltipProperty =
+         DependencyProperty.Register("Scene3DTooltip",
+         typeof(string),
+         typeof(Scene3DButton),
+         new UIPropertyMetadata(null));
+
         public static readonly DependencyProperty Scene3DTextProperty =
          DependencyProperty.Register("Scene3DText",
          typeof(string),
@@ -76,9 +84,23 @@ namespace Scene3DLib
             set
             {
                 SetValue(Scene3DTextProperty, value);
+                this.Scene3DTooltip = value;
                 this.buildTextGeometry();
             }
         }
+        public string Scene3DTooltip
+        {
+            get
+            {
+                string v = (string)GetValue(Scene3DTooltipProperty);
+                return v;
+            }
+            set
+            {
+                SetValue(Scene3DTooltipProperty, value);
+            }
+        }
+
         public string Scene3DObj
         {
             get
@@ -112,76 +134,63 @@ namespace Scene3DLib
         {
             base.OnApplyTemplate();
 
-            string v = (string)GetValue(Scene3DTextProperty);
+            //string v = (string)GetValue(Scene3DTextProperty);
             //Debug.WriteLine("<<<OnApplyTemplate:" + v + ">>>");
-            this.buildTextGeometry();
-        }
 
+            this.buildTextGeometry();
+            this.buildObjGeometry();
+
+            this.Scene3DTooltip = this.Scene3DText;
+            if(string.IsNullOrWhiteSpace(this.Scene3DTooltip) && !string.IsNullOrWhiteSpace(this.Scene3DObj))
+            {
+                this.Scene3DTooltip = System.IO.Path.GetFileNameWithoutExtension(this.Scene3DObj);
+            }
+
+            /*{
+                ColorAnimation animation;
+                animation = new ColorAnimation();
+                animation.From = Colors.Orange;
+                animation.To = Colors.Gray;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(1));
+                animation.RepeatBehavior = RepeatBehavior.Forever;
+                animation.AutoReverse = true;
+                this.scene3DButton.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+            }*/
+        }
+        protected void buildObjGeometry()
+        {
+            if (String.IsNullOrWhiteSpace(this.Scene3DObj)) return;
+
+            ModelVisual3D device = new ModelVisual3D();
+            device.Content = Scene3DLib.Scene3D.getModel(this.Scene3DObj);
+            this.viewport.Children.Add(device);
+            device.Transform = Scene3D.CreateAnimatedTransform1(new Media3D.Transform3DGroup(), new Vector3D(3, 0, 0), new Vector3D(0.1, 0.1, 0));
+        }
         protected void buildTextGeometry()
         {
             if (String.IsNullOrWhiteSpace(this.Scene3DText)) return;
 
-            var builder = new HelixToolkit.Wpf.MeshBuilder(false, false);
-            Debug.WriteLine("<<<buildTextGeometry:" + this.Scene3DText + ">>>");
-            builder.ExtrudeText(
-                this.Scene3DText,
-                "Arial",
-                FontStyles.Normal,
-                FontWeights.Bold,
-                2,
-                new Vector3D(-1, 0, 0), //text direction
-                new Point3D(0, 0, 0),
-                new Point3D(0, 0, 0.001));
+            this.Scene3DTextGeometry = Scene3D.get3DText(this.Scene3DText);
 
-            this.Scene3DTextGeometry = builder.ToMesh(true);
-            PointCollection pc = this.Scene3DTextGeometry.TextureCoordinates;
-
-            Point3D pos = this.viewport.Camera.Position;
-
-            pos.X -= (this.Scene3DText.Length / 2);//=move cam to the right!
-            //pos.Z -= 3;//move cam downwards
-            pos.Z -= 5;
-            pos.Y -= 3;
-            viewport.Camera.Position = pos;
+            //PointCollection pc = this.Scene3DTextGeometry.TextureCoordinates;
 
             {
-                ItemsModel3DTransform = CreateAnimatedTransform1(new Media3D.Transform3DGroup(), new Vector3D(3, 0, 0), new Vector3D(0.1, 0, 0));
+                Point3D pos = this.viewport.Camera.Position;
+                pos.Z -= 99;//move cam downwards
+                viewport.Camera.Position = pos;
+                /*
+                Point3D pos = this.viewport.Camera.Position;
+                pos.X -= (this.Scene3DText.Length / 2);//=move cam to the right!
+                //pos.Z -= 3;//move cam downwards
+                pos.Z -= 5;
+                pos.Y -= 3;
+                viewport.Camera.Position = pos;
+                */
+            }
+            {
+                ItemsModel3DTransform = Scene3D.CreateAnimatedTransform1(new Media3D.Transform3DGroup(), new Vector3D(3, 0, 0), new Vector3D(0.1, 0, 0));
                 //OnPropertyChanged(nameof(ItemsModel3DTransform));
             }
-        }
-
-        private static Media3D.Transform3D CreateAnimatedTransform1(Media3D.Transform3DGroup transformGroup, Media3D.Vector3D center, Media3D.Vector3D axis, double speed = 4)
-        {
-            var rotateAnimation = new Rotation3DAnimation
-            {
-                RepeatBehavior = RepeatBehavior.Forever,
-                By = new Media3D.AxisAngleRotation3D(axis, 90),
-                Duration = TimeSpan.FromSeconds(speed / 2),
-                IsCumulative = true,
-            };
-
-            var rotateTransform = new Media3D.RotateTransform3D();
-            rotateTransform.BeginAnimation(Media3D.RotateTransform3D.RotationProperty, rotateAnimation);
-
-            transformGroup.Children.Add(rotateTransform);
-
-            var rotateAnimation1 = new Rotation3DAnimation
-            {
-                RepeatBehavior = RepeatBehavior.Forever,
-                By = new Media3D.AxisAngleRotation3D(axis, 240),
-                Duration = TimeSpan.FromSeconds(speed / 4),
-                IsCumulative = true,
-            };
-
-            var rotateTransform1 = new Media3D.RotateTransform3D();
-            rotateTransform1.CenterX = center.X;
-            rotateTransform1.CenterY = center.Y;
-            rotateTransform1.CenterZ = center.Z;
-            rotateTransform1.BeginAnimation(Media3D.RotateTransform3D.RotationProperty, rotateAnimation1);
-
-            transformGroup.Children.Add(rotateTransform1);
-
-            return transformGroup;
         }
     }
 }

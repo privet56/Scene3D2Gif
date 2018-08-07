@@ -108,6 +108,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scene3D.cs" />
     <Compile Include="Scene3DButton.xaml.cs">
       <DependentUpon>Scene3DButton.xaml</DependentUpon>
     </Compile>

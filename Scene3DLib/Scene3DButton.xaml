@@ -8,10 +8,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button FontSize="12" Margin="4" Padding="4" Command="{Binding Scene3DCmd}" Background="Transparent" BorderThickness="0" ToolTip="{Binding Scene3DText}"> <!-- Content="{Binding Scene3DText}" -->
+        <Button FontSize="12" Margin="4" Padding="4" Command="{Binding Scene3DCmd}" x:Name="scene3DButton" BorderThickness="0" ToolTip="{Binding Scene3DTooltip}"><!-- Content="{Binding Scene3DText}" Background="Transparent" -->
+            <Button.Background>
+                <SolidColorBrush Color="Azure" Opacity="0.3" />
+            </Button.Background>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimation 
+                                Storyboard.TargetProperty="(Button.Opacity)" 
+                                From="0.3" To="0.6" Duration="0:0:1" AutoReverse="True"  />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
             <h:HelixViewport3D
                     x:Name="viewport"
-                    ZoomExtentsWhenLoaded="False"
+                    ZoomExtentsWhenLoaded="True"
                     ShowCameraInfo="False"
                     ShowCoordinateSystem="False"
                     ShowCameraTarget="False"

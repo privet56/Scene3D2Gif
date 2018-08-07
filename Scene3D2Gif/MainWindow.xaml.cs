@@ -34,7 +34,7 @@ namespace Scene3D2Gif
             //string path = @"d:\projects\Scene3D2Gif\_obj\lea\lea.obj";          //works
             //string path = @"..\..\..\..\_obj\bunny\taeyeon_test.obj";
             string path = @"res/DinoRider.3ds";
-            device.Content = getModel(path);
+            device.Content = Scene3DLib.Scene3D.getModel(path);
             this.helixViewport3D.Children.Add(device);
 
             {
@@ -62,20 +62,5 @@ namespace Scene3D2Gif
             }
         }
 
-        public Model3D getModel(string path)
-        {
-            Model3D device = null;
-            try
-            {
-                //viewport3D.RotateGesture = new MouseGesture(MouseAction.LeftClick);
-                ModelImporter import = new ModelImporter();
-                device = import.Load(path);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            return device;
-        }
     }
 }

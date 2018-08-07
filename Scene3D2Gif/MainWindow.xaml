@@ -19,9 +19,9 @@
         
         <ToolBar x:Name="toolBar" VerticalAlignment="Top">
 
-            <scene3DLib:Scene3DButton Scene3DText="Exit 1 !" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
+            <scene3DLib:Scene3DButton Scene3DText="Exit!" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
             </scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DText="Exit 2 !" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
+            <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
             </scene3DLib:Scene3DButton>
 
             <scene3DLib:Scene3DButton Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
