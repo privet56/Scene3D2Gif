@@ -28,20 +28,43 @@
             <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj" Scene3DCmd="local:AppCommands.ApplicationCloseCommand">
             </scene3DLib:Scene3DButton>
 
-            <ItemsControl ItemsSource="{Binding Scene3DEles}">
-                <ItemsControl.ItemsPanel>
+            <!-- TODO: ani! -->
+            <ItemsControl ItemsSource="{Binding Scene3DEles}" Name="scene3DEles">
+
+                <!-- add ani begin -->
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform />
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+                <ItemsControl.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.SizeChanged">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="scene3DEles"
+                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ItemsControl.Triggers>
+                <!-- add ani end -->
+                
+                <ItemsControl.ItemsPanel> <!-- list horizontally -->
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <!-- Scene3DCmd="{Binding InsertAgainCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}" -->
                         <!-- Scene3DCmd="local:AppCommands.ApplicationCloseCommand" -->
                         <scene3DLib:Scene3DButton
-                            Scene3DObj="{Binding}"
-                            Scene3DCmd="{Binding InsertAgainCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"
-                        >
+                            Scene3DObj="{Binding Scene3DObj}"
+                            Scene3DCmd="{Binding Command}">
                         </scene3DLib:Scene3DButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

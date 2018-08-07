@@ -26,11 +26,9 @@ namespace Scene3D2Gif
     /// </summary>
     public partial class MainWindow : Window
     {
-        //public ObservableCollection<string> insertedElements = new ObservableCollection<string>();
-
         public static readonly DependencyProperty Scene3DElesProperty =
          DependencyProperty.Register("Scene3DEles",
-         typeof(ObservableCollection<string>),
+         typeof(ObservableCollection<Scene3DViewModelLib.Scene3DModel>),
          typeof(MainWindow),
          new UIPropertyMetadata(null));
 
@@ -39,13 +37,13 @@ namespace Scene3D2Gif
         {
             InitializeComponent();
             this.DataContext = this;
-            Scene3DEles = new ObservableCollection<string>();
+            Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
         }
-        public ObservableCollection<string> Scene3DEles
+        public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
         {
             get
             {
-                return (ObservableCollection<string>)GetValue(Scene3DElesProperty);
+                return (ObservableCollection<Scene3DViewModelLib.Scene3DModel>)GetValue(Scene3DElesProperty);
             }
             set
             {
@@ -59,16 +57,9 @@ namespace Scene3D2Gif
                 return new ActionCommand(action => OnInsert(), canExecute => true);
             }
         }
-        public ICommand InsertAgainCommand
+        public void OnInsertAgain(string scene3DModelObj)
         {
-            get
-            {
-                return new ActionCommand(action => OnInsertAgain(), canExecute => true);
-            }
-        }
-        public void OnInsertAgain()
-        {
-            MessageBox.Show("oops I did it again!");
+            MessageBox.Show("oops I did it again("+ scene3DModelObj + ")!");
         }
         public void OnInsert()
         {
@@ -91,7 +82,8 @@ namespace Scene3D2Gif
             ModelVisual3D device = new ModelVisual3D();
             device.Content = Scene3DLib.Scene3D.getModel(openFileDialog.FileName);
             this.helixViewport3D.Children.Add(device);
-            Scene3DEles.Add(openFileDialog.FileName);
+            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(openFileDialog.FileName, new ActionCommand(action => OnInsertAgain(openFileDialog.FileName), canExecute => true));
+            Scene3DEles.Add(scene3DModel);
             Mouse.OverrideCursor = _previousCursor;
         }
     }

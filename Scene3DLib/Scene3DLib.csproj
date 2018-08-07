@@ -147,5 +147,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scene3DViewModelLib\Scene3DViewModelLib.csproj">
+      <Project>{8a55781c-08da-4797-84c8-e54bbd64dff9}</Project>
+      <Name>Scene3DViewModelLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
