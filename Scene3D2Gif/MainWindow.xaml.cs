@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Media3D = System.Windows.Media.Media3D;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace Scene3D2Gif
 {
@@ -25,38 +26,31 @@ namespace Scene3D2Gif
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private MeshGeometry3D textGeometry;
+        //public ObservableCollection<string> insertedElements = new ObservableCollection<string>();
+
+        public static readonly DependencyProperty Scene3DElesProperty =
+         DependencyProperty.Register("Scene3DEles",
+         typeof(ObservableCollection<string>),
+         typeof(MainWindow),
+         new UIPropertyMetadata(null));
+
 
         public MainWindow()
         {
             InitializeComponent();
-            /*
-            ModelVisual3D device = new ModelVisual3D();
-            //string path = @"..\..\..\..\_obj\taeyeon_a.obj";                  //not visible...
-            //string path = @"d:\projects\Scene3D2Gif\_obj\bunny\bunny.obj";    //works
-            //string path = @"d:\projects\Scene3D2Gif\_obj\lea\lea.obj";          //works
-            //string path = @"..\..\..\..\_obj\bunny\taeyeon_test.obj";
-            string path = @"res/DinoRider.3ds";
-            device.Content = Scene3DLib.Scene3D.getModel(path);
-            this.helixViewport3D.Children.Add(device);
-
-            {
-                var builder = new MeshBuilder(false, false);
-                builder.ExtrudeText(
-                    "Helix Toolkit",
-                    "Arial",
-                    FontStyles.Normal,
-                    FontWeights.Bold,
-                    2,
-                    new Vector3D(-1, 0, 0), //text direction
-                    new Point3D(0, 0, 0),
-                    new Point3D(0, 0, 1));
-
-                this.textGeometry = builder.ToMesh(true);
-                PointCollection pc = this.textGeometry.TextureCoordinates;
-            }
             this.DataContext = this;
-            */
+            Scene3DEles = new ObservableCollection<string>();
+        }
+        public ObservableCollection<string> Scene3DEles
+        {
+            get
+            {
+                return (ObservableCollection<string>)GetValue(Scene3DElesProperty);
+            }
+            set
+            {
+                SetValue(Scene3DElesProperty, value);
+            }
         }
         public ICommand InsertCommand
         {
@@ -64,14 +58,18 @@ namespace Scene3D2Gif
             {
                 return new ActionCommand(action => OnInsert(), canExecute => true);
             }
-        }/*
-        public MeshGeometry3D TextGeometry
+        }
+        public ICommand InsertAgainCommand
         {
             get
             {
-                return this.textGeometry;
+                return new ActionCommand(action => OnInsertAgain(), canExecute => true);
             }
-        }*/
+        }
+        public void OnInsertAgain()
+        {
+            MessageBox.Show("oops I did it again!");
+        }
         public void OnInsert()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -87,10 +85,14 @@ namespace Scene3D2Gif
                 Debug.WriteLine("!openFileDialog.ShowDialog()");
                 return;
             }
+            var _previousCursor = Mouse.OverrideCursor;
+            Mouse.OverrideCursor = Cursors.Wait;
 
             ModelVisual3D device = new ModelVisual3D();
             device.Content = Scene3DLib.Scene3D.getModel(openFileDialog.FileName);
             this.helixViewport3D.Children.Add(device);
+            Scene3DEles.Add(openFileDialog.FileName);
+            Mouse.OverrideCursor = _previousCursor;
         }
     }
 }

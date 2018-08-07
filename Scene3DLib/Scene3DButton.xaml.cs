@@ -72,7 +72,7 @@ namespace Scene3DLib
         public Scene3DButton()
         {
             InitializeComponent();
-            this.DataContext = this;
+            //this.DataContext = this;
         }
         public string Scene3DText
         {
@@ -135,7 +135,7 @@ namespace Scene3DLib
             base.OnApplyTemplate();
 
             //string v = (string)GetValue(Scene3DTextProperty);
-            //Debug.WriteLine("<<<OnApplyTemplate:" + v + ">>>");
+            Debug.WriteLine("<<<OnApplyTemplate:" + this.Scene3DObj + ">>>");
 
             this.buildTextGeometry();
             this.buildObjGeometry();
