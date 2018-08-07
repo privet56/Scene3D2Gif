@@ -54,6 +54,13 @@ namespace Scene3D2Gif
                 this.DataContext = this;
             }
         }
+        public ICommand InsertCommand
+        {
+            get
+            {
+                return new ActionCommand(action => OnInsert(), canExecute => true);
+            }
+        }
         public MeshGeometry3D TextGeometry
         {
             get
@@ -61,6 +68,9 @@ namespace Scene3D2Gif
                 return this.textGeometry;
             }
         }
-
+        public void OnInsert()
+        {
+            MessageBox.Show("OnInsert");
+        }
     }
 }
