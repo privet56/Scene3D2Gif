@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         xmlns:h="http://helix-toolkit.org/wpf"
         xmlns:scene3DLib="clr-namespace:Scene3DLib;assembly=Scene3DLib"
+        xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
         Title="3D Scene To Gif Converter" Height="450" Width="800" Icon="res/bunny.ico" x:Name="mainwnd">
 
     <!-- xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf" -->
@@ -20,8 +21,8 @@
         
         <ToolBar x:Name="toolBar" VerticalAlignment="Top">
 
-            <scene3DLib:Scene3DButton Scene3DText="Insert!"     Scene3DCmd="{Binding InsertCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DText="Screenshot into Clipboard"  Scene3DCmd="{Binding ScreenshotCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Insert!"     Scene3DCmd="{Binding InsertCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=''}"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Screenshot into Clipboard"  Scene3DCmd="{Binding ScreenshotCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=''}"></scene3DLib:Scene3DButton>
             <scene3DLib:Scene3DButton Scene3DText="Exit!"       Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
             <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj"  Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
 

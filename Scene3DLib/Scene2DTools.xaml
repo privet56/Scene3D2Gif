@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scene3DLib"
              mc:Ignorable="d" 
+             xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Width="33">

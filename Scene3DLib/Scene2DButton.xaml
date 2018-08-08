@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scene3DLib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
+             d:DesignHeight="66" d:DesignWidth="66">
     <Grid>
         <Button FontSize="12" Margin="4" Padding="4" x:Name="scene2DButton" BorderThickness="0"
                 MouseEnter="OnMouseEnter"
@@ -24,7 +25,11 @@
                     </BeginStoryboard>
                 </EventTrigger>
             </Button.Triggers>
-            <TextBlock Text="button!"/>
+            <StackPanel>
+                <!-- Image Source="pack://application:,,,/Scene3DRes:component/res/grid.png"></Image -->
+                <Image Source="/Scene3DRes;component/res/grid.png" Width="33"></Image>
+                <TextBlock Text="btn!"/>
+            </StackPanel>
         </Button>
     </Grid>
 </UserControl>

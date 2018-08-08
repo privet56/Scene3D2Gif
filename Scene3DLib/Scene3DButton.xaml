@@ -41,7 +41,7 @@
                 
                 <h:DefaultLights/>
 
-                <h:MeshGeometryVisual3D MeshGeometry="{Binding Scene3DTextGeometry, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene3DButton}}, FallbackValue=null}" Fill="Red" Transform="{Binding ItemsModel3DTransform}">
+                <h:MeshGeometryVisual3D MeshGeometry="{Binding Scene3DTextGeometry, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene3DButton}}, FallbackValue=0}" Fill="Red" Transform="{Binding ItemsModel3DTransform}">
                     
                 </h:MeshGeometryVisual3D>
 

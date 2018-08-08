@@ -167,7 +167,7 @@ namespace Scene3DLib
                 this.viewport.Width = this.Scene3DText.Length * 11;
                 Point3D campos = this.viewport.Camera.Position;
                 {
-                    Debug.WriteLine("A: text:'" + this.Scene3DText + "'(" + this.Scene3DText.Length + ") ==> viewportWidth:" + this.viewport.Width + " campos:" + campos.ToString() + "");
+                    //Debug.WriteLine("A: text:'" + this.Scene3DText + "'(" + this.Scene3DText.Length + ") ==> viewportWidth:" + this.viewport.Width + " campos:" + campos.ToString() + "");
 
                     //A: text: 'Exit!'(5)                           ==> viewportWidth:55    campos: 2; 16; -79
 
