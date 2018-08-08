@@ -77,7 +77,7 @@
 
         <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="False" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}">
             <h:DefaultLights/>
-            <h:GridLinesVisual3D/>
+            <h:GridLinesVisual3D x:Name="gridLinesVisual3D" />
             <h:HelixViewport3D.DefaultCamera>
                 <PerspectiveCamera Position="-5 -10 5" LookDirection="17 34 -17" UpDirection="0 0 1"/>
             </h:HelixViewport3D.DefaultCamera>

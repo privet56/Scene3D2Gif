@@ -19,6 +19,7 @@ using Media3D = System.Windows.Media.Media3D;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using Scene3D2Lib;
+using PropertyTools.Wpf;
 
 namespace Scene3D2Gif
 {
@@ -103,9 +104,49 @@ namespace Scene3D2Gif
         public void OnScreenshot()
         {
             //TODO: remove grid before screenshot
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)this.helixViewport3D.ActualWidth, (int)this.helixViewport3D.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(this.helixViewport3D);
-            Clipboard.SetImage(rtb);
+            bool showCamInfo = this.helixViewport3D.ShowCameraInfo;
+            bool showViewCube = this.helixViewport3D.ShowViewCube;
+            this.helixViewport3D.ShowCameraInfo = false;
+            this.helixViewport3D.ShowViewCube = false;
+            this.gridLinesVisual3D.Visible = false;
+
+            //RenderTargetBitmap b = new RenderTargetBitmap((int)this.helixViewport3D.ActualWidth, (int)this.helixViewport3D.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            //b.Render(this.helixViewport3D);
+
+            Task.Delay(100).ContinueWith(t => {
+
+                BitmapSource bs = this.CaptureScreen(this.helixViewport3D, 96, 96);
+                Clipboard.SetImage(bs);
+
+                this.helixViewport3D.ShowCameraInfo = showCamInfo;
+                this.helixViewport3D.ShowViewCube = showViewCube;
+                this.gridLinesVisual3D.Visible = true;
+
+                this.On3DControlFocus("DONE. Screenhshot is in the Clipboard.");
+
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+
+        }
+        private BitmapSource CaptureScreen(Visual target, double dpiX, double dpiY)
+        {
+            if (target == null)
+            {
+                return null;
+            }
+            Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)(bounds.Width * dpiX / 96.0),
+                                                            (int)(bounds.Height * dpiY / 96.0),
+                                                            dpiX,
+                                                            dpiY,
+                                                            PixelFormats.Pbgra32);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext ctx = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(target);
+                ctx.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
+            }
+            rtb.Render(dv);
+            return rtb;
         }
         public void OnInsert()
         {
