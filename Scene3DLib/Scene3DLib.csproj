@@ -112,12 +112,19 @@
     <Compile Include="Scene2DButton.xaml.cs">
       <DependentUpon>Scene2DButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scene2DTools.xaml.cs">
+      <DependentUpon>Scene2DTools.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scene3D.cs" />
     <Compile Include="Scene3DButton.xaml.cs">
       <DependentUpon>Scene3DButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scene3DText.cs" />
     <Page Include="Scene2DButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scene2DTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +163,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Scene3DRes\Scene3DRes.csproj">
+      <Project>{8a8dd386-c45c-47eb-9c29-21aa683864d3}</Project>
+      <Name>Scene3DRes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scene3DViewModelLib\Scene3DViewModelLib.csproj">
       <Project>{8a55781c-08da-4797-84c8-e54bbd64dff9}</Project>
       <Name>Scene3DViewModelLib</Name>

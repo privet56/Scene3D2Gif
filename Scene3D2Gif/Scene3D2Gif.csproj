@@ -141,6 +141,10 @@
       <Project>{5f9394bc-f04c-401d-9961-7938678e2f06}</Project>
       <Name>Scene3DLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Scene3DRes\Scene3DRes.csproj">
+      <Project>{8a8dd386-c45c-47eb-9c29-21aa683864d3}</Project>
+      <Name>Scene3DRes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scene3DViewModelLib\Scene3DViewModelLib.csproj">
       <Project>{8a55781c-08da-4797-84c8-e54bbd64dff9}</Project>
       <Name>Scene3DViewModelLib</Name>
