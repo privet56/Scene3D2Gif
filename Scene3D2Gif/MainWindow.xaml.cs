@@ -93,7 +93,7 @@ namespace Scene3D2Gif
             this.helixViewport3D.Children.Add(device);
             Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(scene3DModelObj, new ActionCommand(action => OnInsertAgain(scene3DModelObj), canExecute => true, (b) => {
                 On3DControlFocus(b ? "Insert Again" : null);
-            }));
+            }), device);
             Scene3DEles.Add(scene3DModel);
 
             {

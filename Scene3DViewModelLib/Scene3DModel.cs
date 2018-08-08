@@ -18,14 +18,16 @@ namespace Scene3DViewModelLib
         {
 
         }
-        public Scene3DModel(string scene3DObj, ICommand command)
+        public Scene3DModel(string scene3DObj, ICommand command, ModelVisual3D scene3DModelVisual)
         {
             this.Scene3DObj = scene3DObj;
             this.Command = command;
+            this.Scene3DModelVisual = scene3DModelVisual;
         }
 
         protected string m_Scene3DObj;
         protected ICommand m_Command;
+        protected ModelVisual3D m_Scene3DModelVisual;
 
         public string Scene3DObj
         {
@@ -33,6 +35,15 @@ namespace Scene3DViewModelLib
             set
             {
                 this.m_Scene3DObj = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public ModelVisual3D Scene3DModelVisual
+        {
+            get => this.m_Scene3DModelVisual;
+            set
+            {
+                this.m_Scene3DModelVisual = value;
                 NotifyPropertyChanged();
             }
         }
