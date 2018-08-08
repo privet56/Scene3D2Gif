@@ -3,7 +3,7 @@
 
 ## UI:
 ![uiasgif](https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/scene3d2gif.gif)
-![uiasgif](https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/Scene3D2Gif.v.0.0.3.png)
+<img src="https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/Scene3D2Gif.v.0.0.3.png" height="358" >
 
 ## UI:
 (in front of the IDE)
