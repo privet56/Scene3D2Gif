@@ -75,17 +75,24 @@
             </Button -->
         </ToolBar>
 
-        <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="False" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}">
-            <h:DefaultLights/>
-            <h:PanoramaCube3D Source="res\panorama\skybox5\" />
-            <h:GridLinesVisual3D x:Name="gridLinesVisual3D" />
-            <h:HelixViewport3D.DefaultCamera>
-                <PerspectiveCamera Position="-5 -10 5" LookDirection="17 34 -17" UpDirection="0 0 1"/>
-            </h:HelixViewport3D.DefaultCamera>
-            
-            <!-- h:SunLight/ -->
-            <!-- h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" / -->
-        </h:HelixViewport3D>
+        <DockPanel Grid.Row="1" HorizontalAlignment="Stretch">
+            <StackPanel Width="33">
+                <Button Content="Grid" ></Button>
+                <scene3DLib:Scene2DButton></scene3DLib:Scene2DButton>
+            </StackPanel>
+            <h:HelixViewport3D x:Name="helixViewport3D" ZoomExtentsWhenLoaded="False" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <h:HelixViewport3D.DefaultCamera>
+                    <PerspectiveCamera Position="-5 -10 5" LookDirection="17 34 -17" UpDirection="0 0 1"/>
+                </h:HelixViewport3D.DefaultCamera>
+
+                <h:DefaultLights/>
+                <h:PanoramaCube3D Source="res\panorama\skybox5\" />
+                <h:GridLinesVisual3D x:Name="gridLinesVisual3D" />
+
+                <!-- h:SunLight/ -->
+                <!-- h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" / -->
+            </h:HelixViewport3D>
+        </DockPanel>
 
         <StatusBar DockPanel.Dock="Bottom" Background="Beige" Grid.Row="2">
             <StatusBarItem>
