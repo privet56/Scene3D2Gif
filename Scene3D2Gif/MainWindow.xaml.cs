@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using Scene3D2Lib;
 using PropertyTools.Wpf;
+using Scene3DViewModelLib;
 
 namespace Scene3D2Gif
 {
@@ -39,7 +40,14 @@ namespace Scene3D2Gif
         {
             Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = this;//needed for button-list
+            /* 
+             * 1) destroys manipulator
+             * 2) sets blue on deselect
+            var vm = new MainWindowViewModel(this.helixViewport3D.Viewport);
+            this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.RectangleSelectionCommand, new MouseGesture(MouseAction.LeftClick)));
+            this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.PointSelectionCommand, new MouseGesture(MouseAction.LeftClick, ModifierKeys.Control)));
+            */
         }
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
         {
@@ -112,6 +120,9 @@ namespace Scene3D2Gif
 
             //RenderTargetBitmap b = new RenderTargetBitmap((int)this.helixViewport3D.ActualWidth, (int)this.helixViewport3D.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             //b.Render(this.helixViewport3D);
+
+            //alternative: export to file
+            //this.helixViewport3D.Export(fn);
 
             Task.Delay(100).ContinueWith(t => {
 
