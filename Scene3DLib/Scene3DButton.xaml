@@ -10,6 +10,8 @@
     <Grid>
         <!-- Content="{Binding Scene3DText}" Background="Transparent" -->
         <Button FontSize="12" Margin="4" Padding="4" x:Name="scene3DButton" BorderThickness="0"
+                MouseEnter="OnMouseEnter"
+                MouseLeave="OnMouseOut"
                 Command="{Binding Scene3DCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene3DButton}}}"
                 ToolTip="{Binding Scene3DTooltip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene3DButton}}}">
             <Button.Background>
@@ -34,7 +36,7 @@
                     ShowCameraTarget="False"
                     ShowFieldOfView="False"
                     ShowViewCube="False"
-                    Width="66" Height="33"
+                    Width="55" Height="33"
                 >
                 
                 <h:DefaultLights/>

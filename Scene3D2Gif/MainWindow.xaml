@@ -15,14 +15,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <ToolBar x:Name="toolBar" VerticalAlignment="Top">
 
-            <scene3DLib:Scene3DButton Scene3DText="Insert!" Scene3DCmd="{Binding InsertCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DText="Screenshot" Scene3DCmd="{Binding ScreenshotCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DText="Exit!" Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
-            <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj" Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Insert!"     Scene3DCmd="{Binding InsertCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Screenshot into Clipboard"  Scene3DCmd="{Binding ScreenshotCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, FallbackValue=False}"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DText="Exit!"       Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
+            <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj"  Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
 
             <ItemsControl ItemsSource="{Binding Scene3DEles}" Name="scene3DEles">
 
@@ -74,7 +75,7 @@
             </Button -->
         </ToolBar>
 
-        <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="True" ShowCameraInfo="False" Background="{h:LinearGradientBrush Gray, White}">
+        <h:HelixViewport3D x:Name="helixViewport3D" Grid.Row="1" ZoomExtentsWhenLoaded="False" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}">
             <h:DefaultLights/>
             <h:GridLinesVisual3D/>
             <h:HelixViewport3D.DefaultCamera>
@@ -85,5 +86,10 @@
             <!-- h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" / -->
         </h:HelixViewport3D>
 
+        <StatusBar DockPanel.Dock="Bottom" Background="Beige" Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock Name="statBarText" Text="Ready"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

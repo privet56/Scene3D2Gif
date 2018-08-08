@@ -52,7 +52,7 @@ namespace Scene3DLib
                 "Arial",
                 FontStyles.Normal,
                 FontWeights.Bold,
-                2,
+                29,
                 new Vector3D(-1, 0, 0), //text direction
                 new Point3D(0, 0, 0),
                 new Point3D(0, 0, 0.001));

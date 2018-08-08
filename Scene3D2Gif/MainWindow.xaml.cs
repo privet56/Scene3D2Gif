@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using Media3D = System.Windows.Media.Media3D;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using Scene3D2Lib;
 
 namespace Scene3D2Gif
 {
@@ -54,14 +55,22 @@ namespace Scene3D2Gif
         {
             get
             {
-                return new ActionCommand(action => OnInsert(), canExecute => true);
+                return new ActionCommand(action => OnInsert(), canExecute => true, (b) => {
+                    On3DControlFocus(b ? "Insert a 3D Object" : null);
+                });
             }
+        }
+        public void On3DControlFocus(string mouseOverText)
+        {
+            statBarText.Text = mouseOverText == null ? "Ready..." : mouseOverText;
         }
         public ICommand ScreenshotCommand
         {
             get
             {
-                return new ActionCommand(action => OnScreenshot(), canExecute => true);
+                return new ActionCommand(action => OnScreenshot(), canExecute => true, (b) => {
+                    On3DControlFocus(b ? "Put Screenshot into Clipboard" : null);
+                });
             }
         }
 
@@ -73,7 +82,9 @@ namespace Scene3D2Gif
             ModelVisual3D device = new ModelVisual3D();
             device.Content = Scene3DLib.Scene3D.getModel(scene3DModelObj);
             this.helixViewport3D.Children.Add(device);
-            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(scene3DModelObj, new ActionCommand(action => OnInsertAgain(scene3DModelObj), canExecute => true));
+            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(scene3DModelObj, new ActionCommand(action => OnInsertAgain(scene3DModelObj), canExecute => true, (b) => {
+                On3DControlFocus(b ? "Insert Again" : null);
+            }));
             Scene3DEles.Add(scene3DModel);
 
             {
