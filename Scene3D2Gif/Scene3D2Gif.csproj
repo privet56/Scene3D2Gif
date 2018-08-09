@@ -153,5 +153,8 @@
       <Name>Scene3DViewModelLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="SplashScreen.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
