@@ -21,6 +21,9 @@ using System.Collections.ObjectModel;
 using PropertyTools.Wpf;
 using Scene3DViewModelLib;
 using Scene3DLib;
+using System.Reflection;
+using System.CodeDom.Compiler;
+using Microsoft.JScript;
 
 namespace Scene3D2Gif
 {
@@ -57,6 +60,26 @@ namespace Scene3D2Gif
             */
 
             this.currentScene3D = new Scene3D(this.helixViewport3D, this.gridLinesVisual3D, this.lights, this.panoramaCube3D);
+
+            {   //TODO: read & call startup_automation.js JS
+                string Source = @"
+                package Test 
+                { 
+                  class HelloWorld 
+                  { 
+                    function Hello(name) { return ""Hello, "" + name; }
+                  }
+                }";
+                var provider = new JScriptCodeProvider();
+                var compiler = provider.CreateCompiler();
+                var parameters = new CompilerParameters { GenerateInMemory = true };
+                var results = compiler.CompileAssemblyFromSource(parameters, Source);
+                var assembly = results.CompiledAssembly;
+                dynamic instance = Activator.CreateInstance(assembly.GetType("Test.HelloWorld"));
+                var result = instance.Hello("World");
+                string sr = result.ToString();
+                Debug.WriteLine(sr);
+            }
         }
 
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles

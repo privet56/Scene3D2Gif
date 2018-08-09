@@ -49,6 +49,7 @@
     <Reference Include="HelixToolkit.Wpf.Input">
       <HintPath>Components\HelixToolkit.Wpf.Input.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="NAudio">
       <HintPath>Components\NAudio.dll</HintPath>
     </Reference>
@@ -155,6 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\startup_automation.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
