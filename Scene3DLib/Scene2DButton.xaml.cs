@@ -21,6 +21,19 @@ namespace Scene3DLib
     /// </summary>
     public partial class Scene2DButton : UserControl
     {
+        public static readonly DependencyProperty ButtonModelProperty =
+         DependencyProperty.Register("ButtonModel",
+         typeof(Scene3DViewModelLib.Scene2DButtonModel),
+         typeof(Scene2DButton),
+         new UIPropertyMetadata(null));
+
+        public static readonly DependencyProperty TooltipTextProperty =
+         DependencyProperty.Register("TooltipText",
+         typeof(string),
+         typeof(Scene2DButton),
+         new UIPropertyMetadata(null));
+
+
         public Scene2DButton()
         {
             InitializeComponent();
@@ -39,6 +52,35 @@ namespace Scene3DLib
 
             //string imgsrc = "pack://application:,,,/Scene3DRes;component/res/grid.png";
             //this.img.Source = new BitmapImage(new Uri(this.img.Source.ToString()));
+            Debug.WriteLine("OnApplyTemplate:" + TooltipText);
+        }
+        public Scene3DViewModelLib.Scene2DButtonModel ButtonModel
+        {
+            get
+            {
+                var v = (Scene3DViewModelLib.Scene2DButtonModel)GetValue(ButtonModelProperty);
+                //Debug.WriteLine("SET:"+v.TooltipText);
+                return v;
+            }
+            set
+            {
+                SetValue(ButtonModelProperty, value);
+                //Debug.WriteLine("GET:" + value.TooltipText);
+            }
+        }
+        public string TooltipText
+        {
+            get
+            {
+                var v = (string)GetValue(TooltipTextProperty);
+                Debug.WriteLine("SET_Tooltip:"+v);
+                return v;
+            }
+            set
+            {
+                SetValue(TooltipTextProperty, value);
+                Debug.WriteLine("GET_Tooltip:" + value);
+            }
         }
     }
 }

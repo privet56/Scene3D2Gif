@@ -11,7 +11,7 @@
         <Button FontSize="12" Margin="4" Padding="4" x:Name="scene2DButton" BorderThickness="0"
                 MouseEnter="OnMouseEnter"
                 MouseLeave="OnMouseOut"
-                ToolTip="{Binding Scene2DTooltip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
+                ToolTip="{Binding Path=ButtonModel.TooltipText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
             <Button.Background>
                 <SolidColorBrush Color="Beige" />
             </Button.Background>
@@ -27,7 +27,7 @@
                 </EventTrigger>
             </Button.Triggers -->
             <StackPanel>
-                <Image Source="pack://application:,,,/Scene3DRes;component/res/grid.png" />
+                <Image Source="{Binding Path=ButtonModel.ImgSrc, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}" />
                 <!-- TextBlock Text="btn!"/ -->
             </StackPanel>
         </Button>

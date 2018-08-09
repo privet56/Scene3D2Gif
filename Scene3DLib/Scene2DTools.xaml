@@ -6,12 +6,45 @@
              xmlns:local="clr-namespace:Scene3DLib"
              mc:Ignorable="d" 
              xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
+             xmlns:Scene3DViewModelLib="clr-namespace:Scene3DViewModelLib;assembly=Scene3DViewModelLib"
              d:DesignHeight="450" d:DesignWidth="80">
     <Grid>
         <StackPanel Background="AliceBlue" Margin="3,3,3,3">
-            
-            <local:Scene2DButton></local:Scene2DButton>
-            <local:Scene2DButton></local:Scene2DButton>
+
+            <ItemsControl ItemsSource="{Binding Tools, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DTools}}}" Name="ToolList">
+
+                <!-- TODO: ani only new added ele! -->
+                <!-- add ani begin -->
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform />
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+                
+                <ItemsControl.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.SizeChanged">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ToolList"
+                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ItemsControl.Triggers>
+                <!-- add ani end -->
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type Scene3DViewModelLib:Scene2DButtonModel}">
+                        <!-- ButtonModel="{Binding}" -->
+                        <local:Scene2DButton ButtonModel="{Binding}"></local:Scene2DButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--local:Scene2DButton></local:Scene2DButton -->
             
         </StackPanel>
     </Grid>

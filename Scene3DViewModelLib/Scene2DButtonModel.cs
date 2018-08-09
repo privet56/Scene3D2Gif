@@ -20,15 +20,25 @@ namespace Scene3DViewModelLib
         }
         public Scene2DButtonModel(string imgSrc, string tooltipText, ActionCommand commandClick, ActionCommand commandMouseOver)
         {
-            this.imgSrc = imgSrc;
-            this.tooltipText = tooltipText;
-            this.commandClick = commandClick;
-            this.commandMouseOver = commandMouseOver;
+            this.ImgSrc = imgSrc;
+            this.TooltipText = tooltipText;
+            this.CommandClick = commandClick;
+            this.CommandMouseOver = commandMouseOver;
         }
 
-        protected string imgSrc { get => this.imgSrc; set { this.imgSrc = value; NotifyPropertyChanged(); } }
-        protected string tooltipText { get => this.tooltipText; set { this.tooltipText = value; NotifyPropertyChanged(); } }
-        protected ActionCommand commandClick { get => this.commandClick; set { this.commandClick = value; NotifyPropertyChanged(); } }
-        protected ActionCommand commandMouseOver { get => this.commandMouseOver; set { this.commandMouseOver = value; NotifyPropertyChanged(); } }
+        protected string m_imgSrc;
+        protected string m_tooltipText;
+        protected ActionCommand m_commandClick;
+        protected ActionCommand m_commandMouseOver;
+
+        public string ImgSrc { get => this.m_imgSrc; set { this.m_imgSrc = value; NotifyPropertyChanged(); } }
+        public string TooltipText { get => this.m_tooltipText; set { this.m_tooltipText = value; NotifyPropertyChanged(); } }
+        public ActionCommand CommandClick { get => this.m_commandClick; set { this.m_commandClick = value; NotifyPropertyChanged(); } }
+        public ActionCommand CommandMouseOver { get => this.m_commandMouseOver; set { this.m_commandMouseOver = value; NotifyPropertyChanged(); } }
+
+        public override string ToString()
+        {
+            return "Scene2DButtonModel {imgSrc} {tooltipText}";
+        }
     }
 }

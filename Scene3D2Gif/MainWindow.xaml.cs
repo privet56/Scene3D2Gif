@@ -39,7 +39,7 @@ namespace Scene3D2Gif
         {
             Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
             InitializeComponent();
-            this.DataContext = this;//needed for button-list
+            this.DataContext = this;//needed for button-list        //TODO: don't do this!!!
             /* 
              * 1) destroys manipulator
              * 2) sets blue on deselect (->solved with attached prop!)
