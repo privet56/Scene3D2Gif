@@ -1,6 +1,20 @@
-﻿package Test
+﻿class StartupConfiguration
 {
-    class HelloWorld { 
-                    function Hello(name) { return ""Hello, "" + name; }
+    function getStartup3DFile(launchArguements)
+    {
+        return "res/sw/falcon.3ds";
     }
 }
+
+/*
+package Startup
+{
+    class StartupConfiguration
+    {
+        function getStartup3DFile(launchArguements)
+        {
+            return "res/lea/lea.obj";
+        }
+    }
+}
+*/

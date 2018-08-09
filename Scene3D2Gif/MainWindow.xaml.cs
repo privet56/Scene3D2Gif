@@ -61,25 +61,25 @@ namespace Scene3D2Gif
 
             this.currentScene3D = new Scene3D(this.helixViewport3D, this.gridLinesVisual3D, this.lights, this.panoramaCube3D);
 
-            {   //TODO: read & call startup_automation.js JS
-                string Source = @"
-                package Test 
-                { 
-                  class HelloWorld 
-                  { 
-                    function Hello(name) { return ""Hello, "" + name; }
-                  }
-                }";
+            Task.Delay(999).ContinueWith(t => {
+
+                string Source = System.IO.File.ReadAllText(@"res\startup_automation.js");
+
                 var provider = new JScriptCodeProvider();
                 var compiler = provider.CreateCompiler();
                 var parameters = new CompilerParameters { GenerateInMemory = true };
                 var results = compiler.CompileAssemblyFromSource(parameters, Source);
                 var assembly = results.CompiledAssembly;
-                dynamic instance = Activator.CreateInstance(assembly.GetType("Test.HelloWorld"));
-                var result = instance.Hello("World");
+                dynamic instance = Activator.CreateInstance(assembly.GetType("StartupConfiguration"));
+                var result = instance.getStartup3DFile("launch configuration");
+
                 string sr = result.ToString();
-                Debug.WriteLine(sr);
-            }
+                if(!string.IsNullOrWhiteSpace(sr))
+                {
+                    this.OnInsertAgain(sr);
+                }
+
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
