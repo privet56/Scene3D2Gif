@@ -24,7 +24,7 @@ using System.Windows.Media.Animation;
 
 using Media3D = System.Windows.Media.Media3D;
 using System.ComponentModel;
-using Scene3D2Lib;
+using Scene3DViewModelLib;
 
 namespace Scene3DLib
 {

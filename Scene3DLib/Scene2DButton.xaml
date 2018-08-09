@@ -6,15 +6,16 @@
              xmlns:local="clr-namespace:Scene3DLib"
              mc:Ignorable="d" 
              xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
-             d:DesignHeight="66" d:DesignWidth="66">
+             d:DesignHeight="99" d:DesignWidth="99">
     <Grid>
         <Button FontSize="12" Margin="4" Padding="4" x:Name="scene2DButton" BorderThickness="0"
                 MouseEnter="OnMouseEnter"
-                MouseLeave="OnMouseOut">
+                MouseLeave="OnMouseOut"
+                ToolTip="{Binding Scene2DTooltip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
             <Button.Background>
-                <SolidColorBrush Color="Azure" Opacity="0.3" />
+                <SolidColorBrush Color="Beige" />
             </Button.Background>
-            <Button.Triggers>
+            <!-- Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Loaded">
                     <BeginStoryboard>
                         <Storyboard RepeatBehavior="Forever">
@@ -24,11 +25,10 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
-            </Button.Triggers>
+            </Button.Triggers -->
             <StackPanel>
-                <!-- Image Source="pack://application:,,,/Scene3DRes:component/res/grid.png"></Image -->
-                <Image Source="/Scene3DRes;component/res/grid.png" Width="33"></Image>
-                <TextBlock Text="btn!"/>
+                <Image Source="pack://application:,,,/Scene3DRes;component/res/grid.png" />
+                <!-- TextBlock Text="btn!"/ -->
             </StackPanel>
         </Button>
     </Grid>

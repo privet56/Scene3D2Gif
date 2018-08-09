@@ -18,7 +18,6 @@ using System.Windows.Shapes;
 using Media3D = System.Windows.Media.Media3D;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
-using Scene3D2Lib;
 using PropertyTools.Wpf;
 using Scene3DViewModelLib;
 

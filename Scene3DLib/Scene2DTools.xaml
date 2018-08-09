@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:Scene3DLib"
              mc:Ignorable="d" 
              xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="80">
     <Grid>
-        <StackPanel Width="33">
+        <StackPanel Background="AliceBlue" Margin="3,3,3,3">
             
             <local:Scene2DButton></local:Scene2DButton>
             <local:Scene2DButton></local:Scene2DButton>
+            
         </StackPanel>
     </Grid>
 </UserControl>

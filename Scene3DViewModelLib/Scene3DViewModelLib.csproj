@@ -94,7 +94,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionCommand.cs" />
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Scene2DButtonModel.cs" />
     <Compile Include="Scene3DModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

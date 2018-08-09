@@ -2,5 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Scene3DRes">
-    
+
+    <BitmapImage x:Key="ImageSourceGrid" UriSource="pack://application:,,,/Scene3DRes;component/res/grid.png" />
+
 </ResourceDictionary>

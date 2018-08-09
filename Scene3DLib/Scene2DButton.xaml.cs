@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Scene3DLib
 {
@@ -31,6 +32,13 @@ namespace Scene3DLib
         public void OnMouseOut(object sender, MouseEventArgs e)
         {
 
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            //string imgsrc = "pack://application:,,,/Scene3DRes;component/res/grid.png";
+            //this.img.Source = new BitmapImage(new Uri(this.img.Source.ToString()));
         }
     }
 }

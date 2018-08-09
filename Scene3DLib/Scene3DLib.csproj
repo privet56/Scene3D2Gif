@@ -108,7 +108,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionCommand.cs" />
     <Compile Include="Scene2DButton.xaml.cs">
       <DependentUpon>Scene2DButton.xaml</DependentUpon>
     </Compile>

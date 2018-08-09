@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Scene3D2Lib
+namespace Scene3DViewModelLib
 {
     public class ActionCommand : ICommand
     {

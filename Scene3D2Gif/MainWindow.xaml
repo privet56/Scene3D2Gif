@@ -76,13 +76,17 @@
             </Button -->
         </ToolBar>
 
-        <DockPanel Grid.Row="1" HorizontalAlignment="Stretch">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
             <scene3DLib:Scene2DTools></scene3DLib:Scene2DTools>
-            <!-- StackPanel Width="33">
-                <Button Content="Grid" ></Button>
-                <scene3DLib:Scene2DButton></scene3DLib:Scene2DButton>
-            </StackPanel -->
-            <h:HelixViewport3D x:Name="helixViewport3D" ZoomExtentsWhenLoaded="False" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            
+            <GridSplitter Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch" ResizeBehavior="CurrentAndNext"/>
+
+            <h:HelixViewport3D Grid.Column="1" x:Name="helixViewport3D" ZoomExtentsWhenLoaded="False" ShowCameraInfo="True" Background="{h:LinearGradientBrush Gray, White}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <h:HelixViewport3D.DefaultCamera>
                     <PerspectiveCamera Position="-5 -10 5" LookDirection="17 34 -17" UpDirection="0 0 1"/>
                 </h:HelixViewport3D.DefaultCamera>
@@ -94,7 +98,8 @@
                 <!-- h:SunLight/ -->
                 <!-- h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" / -->
             </h:HelixViewport3D>
-        </DockPanel>
+        </Grid>
+
 
         <StatusBar DockPanel.Dock="Bottom" Background="Beige" Grid.Row="2">
             <StatusBarItem>
