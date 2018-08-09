@@ -8,13 +8,13 @@
              xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
              d:DesignHeight="99" d:DesignWidth="99">
     <Grid>
-        <Button FontSize="12" Margin="4" Padding="4" x:Name="scene2DButton" BorderThickness="0"
+        <ToggleButton FontSize="12" Margin="4" Padding="4" x:Name="scene2DButton" BorderThickness="0"
                 MouseEnter="OnMouseEnter"
                 MouseLeave="OnMouseOut"
                 ToolTip="{Binding Path=ButtonModel.TooltipText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
-            <Button.Background>
+            <ToggleButton.Background>
                 <SolidColorBrush Color="Beige" />
-            </Button.Background>
+            </ToggleButton.Background>
             <!-- Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Loaded">
                     <BeginStoryboard>
@@ -30,6 +30,6 @@
                 <Image Source="{Binding Path=ButtonModel.ImgSrc, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}" />
                 <!-- TextBlock Text="btn!"/ -->
             </StackPanel>
-        </Button>
+        </ToggleButton>
     </Grid>
 </UserControl>

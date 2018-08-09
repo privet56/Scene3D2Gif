@@ -34,12 +34,18 @@ namespace Scene3D2Gif
          typeof(MainWindow),
          new UIPropertyMetadata(null));
 
+        public static readonly DependencyProperty ViewportProperty =
+         DependencyProperty.Register("Viewport",
+         typeof(HelixViewport3D),
+         typeof(MainWindow),
+         new UIPropertyMetadata(null));
 
         public MainWindow()
         {
             Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
             InitializeComponent();
-            this.DataContext = this;//needed for button-list        //TODO: don't do this!!!
+
+            //this.DataContext = this;//needed for button-list        //TODO: don't do this!!!
             /* 
              * 1) destroys manipulator
              * 2) sets blue on deselect (->solved with attached prop!)
@@ -48,6 +54,8 @@ namespace Scene3D2Gif
             this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.RectangleSelectionCommand, new MouseGesture(MouseAction.LeftClick)));
             this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.PointSelectionCommand, new MouseGesture(MouseAction.LeftClick, ModifierKeys.Control)));
             */
+
+            this.Viewport = this.helixViewport3D;
         }
 
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
@@ -61,6 +69,18 @@ namespace Scene3D2Gif
                 SetValue(Scene3DElesProperty, value);
             }
         }
+        public HelixViewport3D Viewport
+        {
+            get
+            {
+                return (HelixViewport3D)GetValue(ViewportProperty);
+            }
+            set
+            {
+                SetValue(ViewportProperty, value);
+            }
+        }
+
         public ICommand InsertCommand
         {
             get
@@ -70,6 +90,16 @@ namespace Scene3D2Gif
                 });
             }
         }
+        public Action<string> OnFocusAction
+        {
+            get
+            {
+                return (s) => {
+                    On3DControlFocus(s);
+                };
+            }
+        }
+
         public void On3DControlFocus(string mouseOverText)
         {
             statBarText.Text = mouseOverText == null ? "Ready..." : mouseOverText;

@@ -8,6 +8,7 @@
         xmlns:h="http://helix-toolkit.org/wpf"
         xmlns:scene3DLib="clr-namespace:Scene3DLib;assembly=Scene3DLib"
         xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
+        xmlns:Scene3DViewModelLib="clr-namespace:Scene3DViewModelLib;assembly=Scene3DViewModelLib"
         Title="3D Scene To Gif Converter" Height="450" Width="800" Icon="res/bunny.ico" x:Name="mainwnd">
 
     <!-- xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf" -->
@@ -26,7 +27,7 @@
             <scene3DLib:Scene3DButton Scene3DText="Exit!"       Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
             <scene3DLib:Scene3DButton Scene3DObj="res/x/X.obj"  Scene3DCmd="local:AppCommands.ApplicationCloseCommand"></scene3DLib:Scene3DButton>
 
-            <ItemsControl ItemsSource="{Binding Scene3DEles}" Name="scene3DEles">
+            <ItemsControl ItemsSource="{Binding Scene3DEles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Name="scene3DEles">
 
                 <!-- TODO: ani only new added ele! -->
                 <!-- add ani begin -->
@@ -82,7 +83,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <scene3DLib:Scene2DTools></scene3DLib:Scene2DTools>
+            <scene3DLib:Scene2DTools  Name="scene2DTools"
+                                      OnFocusAction="{Binding OnFocusAction, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                      Viewport="{Binding Viewport, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></scene3DLib:Scene2DTools>
             
             <GridSplitter Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch" ResizeBehavior="CurrentAndNext"/>
 
