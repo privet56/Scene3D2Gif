@@ -12,21 +12,31 @@
                 MouseEnter="OnMouseEnter"
                 MouseLeave="OnMouseOut"
                 Click="OnClick"
+                RenderTransformOrigin=".5,.5"
                 ToolTip="{Binding Path=ButtonModel.TooltipText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
+            <ToggleButton.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="22"/>
+                </Style>
+            </ToggleButton.Resources>
             <ToggleButton.Background>
                 <SolidColorBrush Color="Beige" />
             </ToggleButton.Background>
-            <!-- Button.Triggers>
+            <ToggleButton.RenderTransform>
+                <!-- rotation around center: RenderTransformOrigin=".5,.5" -->
+                <RotateTransform x:Name="noFreeze" CenterX="0.5" CenterY="0.5"  Angle="90" />
+            </ToggleButton.RenderTransform>
+            <ToggleButton.Triggers>
                 <EventTrigger RoutedEvent="Button.Loaded">
                     <BeginStoryboard>
                         <Storyboard RepeatBehavior="Forever">
                             <DoubleAnimation 
-                                Storyboard.TargetProperty="(Button.Opacity)" 
-                                From="0.3" To="0.6" Duration="0:0:1" AutoReverse="True"  />
+                                Storyboard.TargetProperty="(ToggleButton.RenderTransform).(RotateTransform.Angle)" 
+                               To="-360" Duration="0:0:9" RepeatBehavior="Forever" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
-            </Button.Triggers -->
+            </ToggleButton.Triggers>
             <StackPanel>
                 <Image Source="{Binding Path=ButtonModel.ImgSrc, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}" />
                 <!-- TextBlock Text="btn!"/ -->

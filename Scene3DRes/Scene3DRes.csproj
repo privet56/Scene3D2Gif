@@ -84,5 +84,8 @@
   <ItemGroup>
     <Resource Include="res\viewCube.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\skybox.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -56,7 +56,7 @@ namespace Scene3D2Gif
             this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.PointSelectionCommand, new MouseGesture(MouseAction.LeftClick, ModifierKeys.Control)));
             */
 
-            this.currentScene3D = new Scene3D(this.helixViewport3D, this.gridLinesVisual3D);
+            this.currentScene3D = new Scene3D(this.helixViewport3D, this.gridLinesVisual3D, this.lights, this.panoramaCube3D);
         }
 
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles

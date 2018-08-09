@@ -94,8 +94,8 @@
                     <PerspectiveCamera Position="-5 -10 5" LookDirection="17 34 -17" UpDirection="0 0 1"/>
                 </h:HelixViewport3D.DefaultCamera>
 
-                <h:DefaultLights/>
-                <h:PanoramaCube3D Source="res\panorama\skybox5\" />
+                <h:DefaultLights x:Name="lights" />
+                <h:PanoramaCube3D x:Name="panoramaCube3D" Source="res\panorama\skybox5\" />
                 
                 <h:GridLinesVisual3D x:Name="gridLinesVisual3D" />
 

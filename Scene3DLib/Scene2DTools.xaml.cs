@@ -55,7 +55,7 @@ namespace Scene3DLib
                 ActionCommand cmd = new ActionCommand(action => OnGridToogle(), canExecute => true, (b) => {
                     OnFocus(b ? txt : null);
                 });
-                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/grid.png", txt, cmd);
+                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/grid.png", txt, cmd, Tools.Count);
                 Tools.Add(buttonModelGrid);
             }
             {
@@ -63,7 +63,7 @@ namespace Scene3DLib
                 ActionCommand cmd = new ActionCommand(action => OnCameraInfoToogle(), canExecute => true, (b) => {
                     OnFocus(b ? txt : null);
                 });
-                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/cameraInfo.png", txt, cmd);
+                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/cameraInfo.png", txt, cmd, Tools.Count);
                 Tools.Add(buttonModelGrid);
             }
             {
@@ -71,11 +71,28 @@ namespace Scene3DLib
                 ActionCommand cmd = new ActionCommand(action => OnViewCubeToogle(), canExecute => true, (b) => {
                     OnFocus(b ? txt : null);
                 });
-                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/viewCube.png", txt, cmd);
+                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/viewCube.png", txt, cmd, Tools.Count);
+                Tools.Add(buttonModelGrid);
+            }
+            {
+                string txt = "Show/Hide SkyBox";
+                ActionCommand cmd = new ActionCommand(action => OnViewSkyBoxToogle(), canExecute => true, (b) => {
+                    OnFocus(b ? txt : null);
+                });
+                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/skybox.png", txt, cmd, Tools.Count);
                 Tools.Add(buttonModelGrid);
             }
         }
 
+        double panoramaCube3D_OrgSize = -99.9;
+        private void OnViewSkyBoxToogle()
+        {
+            //this.currentScene3D.panoramaCube3D.AnimateOpacity(0.0, 3.3);
+            if (panoramaCube3D_OrgSize < -9)
+                panoramaCube3D_OrgSize = this.currentScene3D.panoramaCube3D.Size;
+
+            this.currentScene3D.panoramaCube3D.Size = (this.currentScene3D.panoramaCube3D.Size < 0.1) ? panoramaCube3D_OrgSize : 0.0001;
+        }
         private void OnCameraInfoToogle()
         {
             this.currentScene3D.viewport.ShowCameraInfo = this.currentScene3D.viewport.ShowCameraInfo ? false : true;

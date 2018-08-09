@@ -18,26 +18,24 @@ namespace Scene3DViewModelLib
         {
 
         }
-        public Scene2DButtonModel(string imgSrc, string tooltipText, ActionCommand command/*Click, ActionCommand commandMouseOver*/)
+
+        public Scene2DButtonModel(string imgSrc, string tooltipText, ActionCommand command, int index)
         {
             this.ImgSrc = imgSrc;
             this.TooltipText = tooltipText;
             this.Command = command;
-            //this.CommandClick = commandClick;
-            //this.CommandMouseOver = commandMouseOver;
+            this.Index = index;
         }
 
+        protected int m_index;
         protected string m_imgSrc;
         protected string m_tooltipText;
         protected ActionCommand m_command;
-        //protected ActionCommand m_commandClick;
-        //protected ActionCommand m_commandMouseOver;
 
+        public int Index { get => this.m_index; set { this.m_index = value; NotifyPropertyChanged(); } }
         public string ImgSrc { get => this.m_imgSrc; set { this.m_imgSrc = value; NotifyPropertyChanged(); } }
         public string TooltipText { get => this.m_tooltipText; set { this.m_tooltipText = value; NotifyPropertyChanged(); } }
         public ActionCommand Command { get => this.m_command; set { this.m_command = value; NotifyPropertyChanged(); } }
-        //public ActionCommand CommandClick { get => this.m_commandClick; set { this.m_commandClick = value; NotifyPropertyChanged(); } }
-        //public ActionCommand CommandMouseOver { get => this.m_commandMouseOver; set { this.m_commandMouseOver = value; NotifyPropertyChanged(); } }
 
         public override string ToString()
         {

@@ -30,11 +30,16 @@ namespace Scene3DLib
     {
         public HelixViewport3D viewport { get; set; }
         public GridLinesVisual3D grid { get; set; }
+        public LightSetup light { get; set; }
+        public PanoramaCube3D panoramaCube3D { get; set; }
 
-        public Scene3D(HelixViewport3D viewport, GridLinesVisual3D grid)
+
+        public Scene3D(HelixViewport3D viewport, GridLinesVisual3D grid, LightSetup light, PanoramaCube3D panoramaCube3D)
         {
             this.viewport = viewport;
             this.grid = grid;
+            this.light = light;
+            this.panoramaCube3D = panoramaCube3D;
         }
 
         public static Model3D getModel(string path)
