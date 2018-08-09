@@ -96,6 +96,8 @@
   <ItemGroup>
     <Compile Include="ActionCommand.cs" />
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="GeometryModel3DProperties.cs" />
     <Compile Include="Scene2DButtonModel.cs" />
     <Compile Include="Scene3DModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

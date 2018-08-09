@@ -42,12 +42,14 @@ namespace Scene3D2Gif
             this.DataContext = this;//needed for button-list
             /* 
              * 1) destroys manipulator
-             * 2) sets blue on deselect
+             * 2) sets blue on deselect (->solved with attached prop!)
+
             var vm = new MainWindowViewModel(this.helixViewport3D.Viewport);
             this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.RectangleSelectionCommand, new MouseGesture(MouseAction.LeftClick)));
             this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.PointSelectionCommand, new MouseGesture(MouseAction.LeftClick, ModifierKeys.Control)));
             */
         }
+
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
         {
             get
