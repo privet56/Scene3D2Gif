@@ -7,7 +7,7 @@
 
 ## UI:
 (in front of the IDE)
-![ui](https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/Scene3D2Gif_ui.png)
+<img src="https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/scene3d2gif_ui_withTools.gif" >
 
 ## Pre-Requisites:
 	Visual Studio 2017 / Community Edition with Desktop WPF Support
