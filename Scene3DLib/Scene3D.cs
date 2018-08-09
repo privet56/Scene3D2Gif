@@ -28,6 +28,15 @@ namespace Scene3DLib
 {
     public class Scene3D
     {
+        public HelixViewport3D viewport { get; set; }
+        public GridLinesVisual3D grid { get; set; }
+
+        public Scene3D(HelixViewport3D viewport, GridLinesVisual3D grid)
+        {
+            this.viewport = viewport;
+            this.grid = grid;
+        }
+
         public static Model3D getModel(string path)
         {
             Model3D device = null;

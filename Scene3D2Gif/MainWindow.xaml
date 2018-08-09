@@ -85,7 +85,7 @@
 
             <scene3DLib:Scene2DTools  Name="scene2DTools"
                                       OnFocusAction="{Binding OnFocusAction, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
-                                      Viewport="{Binding Viewport, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></scene3DLib:Scene2DTools>
+                                      currentScene3D="{Binding currentScene3D, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></scene3DLib:Scene2DTools>
             
             <GridSplitter Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch" ResizeBehavior="CurrentAndNext"/>
 
@@ -96,13 +96,13 @@
 
                 <h:DefaultLights/>
                 <h:PanoramaCube3D Source="res\panorama\skybox5\" />
+                
                 <h:GridLinesVisual3D x:Name="gridLinesVisual3D" />
 
                 <!-- h:SunLight/ -->
                 <!-- h:MeshGeometryVisual3D MeshGeometry="{Binding TextGeometry}" Fill="White" / -->
             </h:HelixViewport3D>
         </Grid>
-
 
         <StatusBar DockPanel.Dock="Bottom" Background="Beige" Grid.Row="2">
             <StatusBarItem>

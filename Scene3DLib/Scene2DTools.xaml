@@ -25,11 +25,13 @@
                     <EventTrigger RoutedEvent="FrameworkElement.SizeChanged">
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ToolList"
-                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                <!-- .TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)" -->
+                                <!-- DoubleAnimationUsingKeyFrames Storyboard.TargetName="ToolList"
+                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(RotateTransform.Angle)">
                                     <EasingDoubleKeyFrame KeyTime="0" Value="-50" />
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0" />
-                                </DoubleAnimationUsingKeyFrames>
+                                </DoubleAnimationUsingKeyFrames -->
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(RotateTransform.Angle)" From="0" To="-360" Duration="0:0:9" RepeatBehavior="Forever" />
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>

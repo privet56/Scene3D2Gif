@@ -75,9 +75,14 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="res\cameraInfo.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="res\grid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\viewCube.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

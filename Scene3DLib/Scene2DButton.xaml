@@ -11,6 +11,7 @@
         <ToggleButton FontSize="12" Margin="4" Padding="4" x:Name="scene2DButton" BorderThickness="0"
                 MouseEnter="OnMouseEnter"
                 MouseLeave="OnMouseOut"
+                Click="OnClick"
                 ToolTip="{Binding Path=ButtonModel.TooltipText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
             <ToggleButton.Background>
                 <SolidColorBrush Color="Beige" />

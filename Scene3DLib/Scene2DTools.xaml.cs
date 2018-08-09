@@ -30,9 +30,9 @@ namespace Scene3DLib
          typeof(Scene2DTools),
          new UIPropertyMetadata(null));
 
-        public static readonly DependencyProperty ViewportProperty =
-         DependencyProperty.Register("Viewport",
-         typeof(HelixViewport3D),
+        public static readonly DependencyProperty currentScene3DProperty =
+         DependencyProperty.Register("currentScene3D",
+         typeof(Scene3D),
          typeof(Scene2DTools),
          new UIPropertyMetadata(null));
 
@@ -48,6 +48,8 @@ namespace Scene3DLib
 
             InitializeComponent();
 
+            //TODO: Actions in extra new Classes incl impl!
+
             {
                 string txt = "Grid On/Off";
                 ActionCommand cmd = new ActionCommand(action => OnGridToogle(), canExecute => true, (b) => {
@@ -56,11 +58,35 @@ namespace Scene3DLib
                 Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/grid.png", txt, cmd);
                 Tools.Add(buttonModelGrid);
             }
+            {
+                string txt = "Camera Info On/Off";
+                ActionCommand cmd = new ActionCommand(action => OnCameraInfoToogle(), canExecute => true, (b) => {
+                    OnFocus(b ? txt : null);
+                });
+                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/cameraInfo.png", txt, cmd);
+                Tools.Add(buttonModelGrid);
+            }
+            {
+                string txt = "Show/Hide View Cube";
+                ActionCommand cmd = new ActionCommand(action => OnViewCubeToogle(), canExecute => true, (b) => {
+                    OnFocus(b ? txt : null);
+                });
+                Scene2DButtonModel buttonModelGrid = new Scene2DButtonModel("pack://application:,,,/Scene3DRes;component/res/viewCube.png", txt, cmd);
+                Tools.Add(buttonModelGrid);
+            }
         }
 
+        private void OnCameraInfoToogle()
+        {
+            this.currentScene3D.viewport.ShowCameraInfo = this.currentScene3D.viewport.ShowCameraInfo ? false : true;
+        }
+        private void OnViewCubeToogle()
+        {
+            this.currentScene3D.viewport.ShowViewCube = this.currentScene3D.viewport.ShowViewCube ? false : true;
+        }
         private void OnGridToogle()
         {
-            
+            this.currentScene3D.grid.Visible = this.currentScene3D.grid.Visible ? false : true;
         }
 
         private void OnFocus(string txt)
@@ -88,15 +114,15 @@ namespace Scene3DLib
                 SetValue(ToolsProperty, value);
             }
         }
-        public HelixViewport3D Viewport
+        public Scene3D currentScene3D
         {
             get
             {
-                return (HelixViewport3D)GetValue(ViewportProperty);
+                return (Scene3D)GetValue(currentScene3DProperty);
             }
             set
             {
-                SetValue(ViewportProperty, value);
+                SetValue(currentScene3DProperty, value);
             }
         }
         public Action<string> OnFocusAction

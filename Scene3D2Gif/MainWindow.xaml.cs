@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using PropertyTools.Wpf;
 using Scene3DViewModelLib;
+using Scene3DLib;
 
 namespace Scene3D2Gif
 {
@@ -34,9 +35,9 @@ namespace Scene3D2Gif
          typeof(MainWindow),
          new UIPropertyMetadata(null));
 
-        public static readonly DependencyProperty ViewportProperty =
-         DependencyProperty.Register("Viewport",
-         typeof(HelixViewport3D),
+        public static readonly DependencyProperty currentScene3DProperty =
+         DependencyProperty.Register("currentScene3D",
+         typeof(Scene3D),
          typeof(MainWindow),
          new UIPropertyMetadata(null));
 
@@ -55,7 +56,7 @@ namespace Scene3D2Gif
             this.helixViewport3D.InputBindings.Add(new MouseBinding(vm.PointSelectionCommand, new MouseGesture(MouseAction.LeftClick, ModifierKeys.Control)));
             */
 
-            this.Viewport = this.helixViewport3D;
+            this.currentScene3D = new Scene3D(this.helixViewport3D, this.gridLinesVisual3D);
         }
 
         public ObservableCollection<Scene3DViewModelLib.Scene3DModel> Scene3DEles
@@ -69,15 +70,15 @@ namespace Scene3D2Gif
                 SetValue(Scene3DElesProperty, value);
             }
         }
-        public HelixViewport3D Viewport
+        public Scene3D currentScene3D
         {
             get
             {
-                return (HelixViewport3D)GetValue(ViewportProperty);
+                return (Scene3D)GetValue(currentScene3DProperty);
             }
             set
             {
-                SetValue(ViewportProperty, value);
+                SetValue(currentScene3DProperty, value);
             }
         }
 
@@ -143,12 +144,13 @@ namespace Scene3D2Gif
         public void OnScreenshot()
         {
             //TODO: remove grid before screenshot
+            /*
             bool showCamInfo = this.helixViewport3D.ShowCameraInfo;
             bool showViewCube = this.helixViewport3D.ShowViewCube;
             this.helixViewport3D.ShowCameraInfo = false;
             this.helixViewport3D.ShowViewCube = false;
             this.gridLinesVisual3D.Visible = false;
-
+            */
             //RenderTargetBitmap b = new RenderTargetBitmap((int)this.helixViewport3D.ActualWidth, (int)this.helixViewport3D.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             //b.Render(this.helixViewport3D);
 
@@ -159,11 +161,11 @@ namespace Scene3D2Gif
 
                 BitmapSource bs = this.CaptureScreen(this.helixViewport3D, 96, 96);
                 Clipboard.SetImage(bs);
-
+                /*
                 this.helixViewport3D.ShowCameraInfo = showCamInfo;
                 this.helixViewport3D.ShowViewCube = showViewCube;
                 this.gridLinesVisual3D.Visible = true;
-
+                */
                 this.On3DControlFocus("DONE. Screenhshot is in the Clipboard.");
 
             }, TaskScheduler.FromCurrentSynchronizationContext());

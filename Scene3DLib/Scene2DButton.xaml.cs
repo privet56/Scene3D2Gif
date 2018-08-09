@@ -39,6 +39,11 @@ namespace Scene3DLib
         {
             this.ButtonModel.Command.OnFocus(false);
         }
+        public void OnClick(object sender, RoutedEventArgs e)
+        {
+            this.ButtonModel.Command.Execute(null);
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
