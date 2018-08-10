@@ -15,9 +15,12 @@
 
 ## NuGet Packages:
 	Install-Package HelixToolkit, HelixToolkit.Wpf, HelixToolkit.Wpf.SharpDX
+	
+## .NET Scripting: App UI JavaScript Automator:
+![uiauto](https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/Scene3D2Gif_app_js_automator.png)
 
 ## TODO:
-	Impl 3D button as resource lib
 	Update helix to get support vertex color reading
 		( see https://github.com/helix-toolkit/helix-toolkit/issues/885 )
-	Impl ScreenToGif function
+	Impl ScreenToGif functionality
+
