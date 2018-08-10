@@ -52,6 +52,12 @@ namespace Scene3DLib
             //this.img.Source = new BitmapImage(new Uri(this.img.Source.ToString()));
             //Debug.WriteLine("OnApplyTemplate:" + TooltipText);
         }
+
+        public string translateAnimationBeginTime
+        {
+            get { return "0:0:0."+(this.ButtonModel.Index*35); }
+        }
+
         public Scene3DViewModelLib.Scene2DButtonModel ButtonModel
         {
             get

@@ -24,13 +24,21 @@
             </ToggleButton.Background>
             <ToggleButton.RenderTransform>
                 <!-- rotation around center: RenderTransformOrigin=".5,.5" -->
-                <RotateTransform x:Name="noFreeze" CenterX="0.5" CenterY="0.5"  Angle="90" />
+                <TransformGroup x:Name="noFreezeTransformGroup">
+                    <RotateTransform x:Name="noFreezeRotateTransform" CenterX="0.5" CenterY="0.5"  Angle="90" />
+                    <TranslateTransform X="-33" Y="0" x:Name="translateTransform" />
+                </TransformGroup>
             </ToggleButton.RenderTransform>
             <ToggleButton.Triggers>
                 <EventTrigger RoutedEvent="Button.Loaded">
                     <BeginStoryboard>
-                        <Storyboard RepeatBehavior="Forever">
-                            <DoubleAnimation Storyboard.TargetProperty="(ToggleButton.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:9" RepeatBehavior="Forever">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:3" From="-33" To="0" Storyboard.TargetProperty="X" Storyboard.TargetName="translateTransform" RepeatBehavior="1x" BeginTime="{Binding translateAnimationBeginTime, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
+                                <DoubleAnimation.EasingFunction>
+                                    <BounceEase EasingMode="EaseOut" Bounces="3" Bounciness="9.5" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="Angle" Storyboard.TargetName="noFreezeRotateTransform" To="-360" Duration="0:0:9" RepeatBehavior="Forever">
                                 <DoubleAnimation.EasingFunction>
                                     <ElasticEase EasingMode="EaseOut" Oscillations="6" Springiness="13" />
                                 </DoubleAnimation.EasingFunction>
