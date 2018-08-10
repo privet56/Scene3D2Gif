@@ -49,6 +49,7 @@
     <Reference Include="HelixToolkit.Wpf.SharpDX, Version=2.3.0.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
       <HintPath>..\packages\HelixToolkit.Wpf.SharpDX.2.3.0\lib\net45\HelixToolkit.Wpf.SharpDX.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="NAudio">
       <HintPath>..\Scene3D2Gif\Components\NAudio.dll</HintPath>
     </Reference>
@@ -108,6 +109,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppJSAutomator.cs" />
     <Compile Include="Scene2DButton.xaml.cs">
       <DependentUpon>Scene2DButton.xaml</DependentUpon>
     </Compile>

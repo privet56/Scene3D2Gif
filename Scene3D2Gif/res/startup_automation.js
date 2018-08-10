@@ -1,8 +1,10 @@
 ﻿class StartupConfiguration
 {
-    function getStartup3DFile(launchArguements)
+    function getStartup3DFile(app)
     {
-        return "res/sw/falcon.3ds";
+        var scene3DObject2Load = "res/sw/falcon.3ds";
+        app.OnInsertAgain(scene3DObject2Load);
+        return scene3DObject2Load;
     }
 }
 

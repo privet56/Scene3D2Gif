@@ -63,21 +63,8 @@ namespace Scene3D2Gif
 
             Task.Delay(999).ContinueWith(t => {
 
-                string Source = System.IO.File.ReadAllText(@"res\startup_automation.js");
-
-                var provider = new JScriptCodeProvider();
-                var compiler = provider.CreateCompiler();
-                var parameters = new CompilerParameters { GenerateInMemory = true };
-                var results = compiler.CompileAssemblyFromSource(parameters, Source);
-                var assembly = results.CompiledAssembly;
-                dynamic instance = Activator.CreateInstance(assembly.GetType("StartupConfiguration"));
-                var result = instance.getStartup3DFile("launch configuration");
-
-                string sr = result.ToString();
-                if(!string.IsNullOrWhiteSpace(sr))
-                {
-                    this.OnInsertAgain(sr);
-                }
+                AppJSAutomator appJSAutomator = new Scene3DLib.AppJSAutomator(this);
+                string scene3DObjectLoaded = appJSAutomator.onStartUp(@"res\startup_automation.js");
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
