@@ -8,15 +8,3 @@
     }
 }
 
-/*
-package Startup
-{
-    class StartupConfiguration
-    {
-        function getStartup3DFile(launchArguements)
-        {
-            return "res/lea/lea.obj";
-        }
-    }
-}
-*/
