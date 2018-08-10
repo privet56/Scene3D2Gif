@@ -9,7 +9,6 @@
         <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
             <ResourceDictionary Source="pack://application:,,,/Scene3DRes;component/Themes/Generic.xaml"/>
-            <ResourceDictionary Source="pack://application:,,,/Scene3DLib;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
