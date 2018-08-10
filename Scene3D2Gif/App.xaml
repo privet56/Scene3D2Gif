@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Scene3D2Gif"
+             xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes"
+             xmlns:scene3DLib="clr-namespace:Scene3DLib;assembly=Scene3DLib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="pack://application:,,,/Scene3DRes;component/Themes/Generic.xaml"/>
+            <ResourceDictionary Source="pack://application:,,,/Scene3DLib;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

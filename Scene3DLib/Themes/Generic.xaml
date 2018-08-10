@@ -1,7 +1,13 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Scene3DLib">
+    xmlns:local="clr-namespace:Scene3DLib"
+    xmlns:scene3DRes="clr-namespace:Scene3DRes;assembly=Scene3DRes">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Scene3DRes;component/Themes/Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <Style TargetType="{x:Type local:Scene3DButton}">
         <Setter Property="Template">
             <Setter.Value>

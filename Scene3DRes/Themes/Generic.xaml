@@ -4,5 +4,12 @@
     xmlns:local="clr-namespace:Scene3DRes">
 
     <BitmapImage x:Key="ImageSourceGrid" UriSource="pack://application:,,,/Scene3DRes;component/res/grid.png" />
+    
+    <SolidColorBrush x:Key="buttonBackgroundColorBrush" Color="Beige" />
+    <Color x:Key="buttonBackgroundColor">Beige</Color>
+
+    <Style x:Key="Scene2DToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="{StaticResource buttonBackgroundColorBrush}"/>
+    </Style>
 
 </ResourceDictionary>

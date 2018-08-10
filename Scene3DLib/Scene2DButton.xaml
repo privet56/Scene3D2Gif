@@ -13,15 +13,16 @@
                 MouseLeave="OnMouseOut"
                 Click="OnClick"
                 RenderTransformOrigin=".5,.5"
+                Style="{StaticResource Scene2DToggleButtonStyle}"
                 ToolTip="{Binding Path=ButtonModel.TooltipText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Scene2DButton}}}">
             <ToggleButton.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="{Binding ElementName=scene2DButton, Path=ActualWidth}"/>
                 </Style>
             </ToggleButton.Resources>
-            <ToggleButton.Background>
-                <SolidColorBrush Color="Beige" />
-            </ToggleButton.Background>
+            <!-- ToggleButton.Background>
+                <SolidColorBrush Color="Beige" />   //set via Style="{StaticResource Scene2DToggleButtonStyle}"
+            </ToggleButton.Background -->
             <ToggleButton.RenderTransform>
                 <!-- rotation around center: RenderTransformOrigin=".5,.5" -->
                 <TransformGroup x:Name="noFreezeTransformGroup">
