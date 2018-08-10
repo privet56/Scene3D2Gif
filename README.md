@@ -2,6 +2,7 @@
 ### Windows .NET 4.x C# Desktop App: Edit 3D Scene and export it as Animated GIF
 
 ## UI:
+<img src="https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/scene3d2gif_ui_withToolsAni.gif" height="358" >
 ![uiasgif](https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/scene3d2gif.gif)
 <img src="https://raw.githubusercontent.com/privet56/Scene3D2Gif/master/Scene3D2Gif.v.0.0.3.png" height="358" >
 

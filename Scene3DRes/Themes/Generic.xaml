@@ -10,8 +10,6 @@
 
     <Style x:Key="Scene2DToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{StaticResource buttonBackgroundColorBrush}"/>
-
-
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Effect">

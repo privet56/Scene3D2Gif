@@ -7,8 +7,10 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="pack://application:,,,/Scene3DRes;component/Themes/Generic.xaml"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Scene3DRes;component/Themes/Generic.xaml"/>
+                <!-- breaks toolbar ... -->
+                <!-- ResourceDictionary Source="pack://application:,,,/Scene3DLib;component/Themes/Generic.xaml"/ -->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
