@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppJSAutomator.cs" />
+    <Compile Include="CalloutWindow.xaml.cs" />
     <Compile Include="Scene2DButton.xaml.cs">
       <DependentUpon>Scene2DButton.xaml</DependentUpon>
     </Compile>
@@ -121,6 +122,10 @@
       <DependentUpon>Scene3DButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scene3DText.cs" />
+    <Page Include="CalloutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Scene2DButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

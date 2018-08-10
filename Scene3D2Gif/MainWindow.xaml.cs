@@ -46,6 +46,8 @@ namespace Scene3D2Gif
 
         public MainWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             Scene3DEles = new ObservableCollection<Scene3DViewModelLib.Scene3DModel>();
             InitializeComponent();
 
@@ -63,9 +65,13 @@ namespace Scene3D2Gif
 
             Task.Delay(999).ContinueWith(t => {
 
-                AppJSAutomator appJSAutomator = new Scene3DLib.AppJSAutomator(this);
-                string scene3DObjectLoaded = appJSAutomator.onStartUp(@"res\startup_automation.js");
-
+                {
+                    AppJSAutomator appJSAutomator = new Scene3DLib.AppJSAutomator(this);
+                    string scene3DObjectLoaded = appJSAutomator.onStartUp(@"res\startup_automation.js");
+                }
+                {   //show hint on startup!
+                    CalloutWindow.showHint("Tools allow to show/hide the controls of the 3D Viewport.", 5000, this);
+                }
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
