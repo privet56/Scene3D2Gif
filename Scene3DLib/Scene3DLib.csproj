@@ -121,7 +121,9 @@
     <Compile Include="Scene3DButton.xaml.cs">
       <DependentUpon>Scene3DButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scene3DObjLoader.cs" />
     <Compile Include="Scene3DText.cs" />
+    <Compile Include="SynchronizationContextAwaiter.cs" />
     <Page Include="CalloutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

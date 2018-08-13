@@ -2,9 +2,9 @@
 {
     function getStartup3DFile(app)
     {
-        var scene3DObject2Load = "res/sw/falcon.3ds";
+        var bLoadBig = true;
+        var scene3DObject2Load = bLoadBig ? "res/leo/leo.obj" : "res/sw/falcon.3ds";
         app.OnInsertAgain(scene3DObject2Load);
         return scene3DObject2Load;
     }
 }
-

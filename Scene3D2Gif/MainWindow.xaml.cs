@@ -24,6 +24,8 @@ using Scene3DLib;
 using System.Reflection;
 using System.CodeDom.Compiler;
 using Microsoft.JScript;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace Scene3D2Gif
 {
@@ -131,17 +133,77 @@ namespace Scene3D2Gif
             }
         }
 
-        public void OnInsertAgain(string scene3DModelObj)
+        public async void OnInsertAgain(string scene3DModelObj)
         {
             var _previousCursor = Mouse.OverrideCursor;
             Mouse.OverrideCursor = Cursors.Wait;
 
+            //sync code
+            //ModelVisual3D device = new ModelVisual3D();
+            //device.Content = Scene3DLib.Scene3D.getModel(scene3DModelObj);
+            //OnInsertAgain(scene3DModelObj, device, _previousCursor);
+
+            //ATTENTION: Viewport3D seems to have a problem with non-ui-thread-loaded 3D objects !!!
+            //This API was accessed with arguments from the wrong context.
+            //Der aufrufende Thread kann nicht auf dieses Objekt zugreifen, da sich das Objekt im Besitz eines anderen Threads befindet.
+            //https://www.google.ca/search?q=This%20API%20was%20accessed%20with%20arguments%20from%20the%20wrong%20context.&cad=h
+            //solution: load Model3D & Freeze it!
+
+            TaskScheduler uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            Dispatcher uiDispatcher = Application.Current.Dispatcher;
+
+            var syncContext = SynchronizationContext.Current;
+            Model3D model3D = await Scene3DObjLoader.GetInstance().LoadObjectWithTaskAsync(scene3DModelObj);
+            await syncContext;
             ModelVisual3D device = new ModelVisual3D();
-            device.Content = Scene3DLib.Scene3D.getModel(scene3DModelObj);
+            device.Content = model3D;
+            OnInsertAgain(scene3DModelObj, device, _previousCursor);
+
+            /*
+            Model3D model3D = await Scene3DObjLoader.GetInstance().LoadObjectWithTaskAsync(scene3DModelObj).;
+
+            Task.Factory.StartNew(() =>
+            {
+                ModelVisual3D device1 = Scene3DObjLoader.GetInstance().LoadOjbect(scene3DModelObj);
+                return device1;
+            }).ContinueWith((device2) =>
+            {
+                OnInsertAgain(scene3DModelObj, device2.Result, _previousCursor);
+
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler);
+            * /
+            /*
+            var syncContext = SynchronizationContext.Current;
+            ModelVisual3D device = await Scene3DObjLoader.GetInstance().LoadObjectWithTaskAsync(scene3DModelObj);
+            await syncContext;
+            * /
+            var syncContext = SynchronizationContext.Current;
+            ModelVisual3D device = null;
+            await Task.Factory.StartNew(() => {
+                device = Scene3DObjLoader.GetInstance().LoadOjbect(scene3DModelObj);
+
+            }, TaskCreationOptions.LongRunning);
+            await syncContext;  //This API was accessed with arguments from the wrong context.
+
+            Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                //uiDispatcher.Invoke(new OnInsertAgainDelegate(OnInsertAgain), scene3DModelObj, device, _previousCursor));
+                uiDispatcher.Invoke(new Action(() => OnInsertAgain(scene3DModelObj, device, _previousCursor)));
+            }));
+            */
+        }
+
+        public delegate void OnInsertAgainDelegate(string scene3DModelObj, ModelVisual3D device, Cursor _previousCursor);
+
+        public void OnInsertAgain(string scene3DModelObj, ModelVisual3D device, Cursor _previousCursor)
+        {
+            Debug.WriteLine("CALLING async is DONE ...curthread:" + Application.Current.Dispatcher.ToString());
             this.helixViewport3D.Children.Add(device);
-            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(scene3DModelObj, new ActionCommand(action => OnInsertAgain(scene3DModelObj), canExecute => true, (b) => {
+            Scene3DViewModelLib.Scene3DModel scene3DModel = new Scene3DViewModelLib.Scene3DModel(scene3DModelObj, new ActionCommand(action => OnInsertAgain(scene3DModelObj), canExecute => true, (b) =>
+            {
                 On3DControlFocus(b ? "Insert Again" : null);
             }), device);
+
             Scene3DEles.Add(scene3DModel);
 
             {
@@ -156,6 +218,8 @@ namespace Scene3D2Gif
             }
 
             Mouse.OverrideCursor = _previousCursor;
+
+            Debug.WriteLine("CALLED  async...");
         }
         public void OnScreenshot()
         {
