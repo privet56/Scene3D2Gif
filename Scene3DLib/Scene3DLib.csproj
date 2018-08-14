@@ -110,7 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppJSAutomator.cs" />
+    <Compile Include="BaseDataModel.cs" />
+    <Compile Include="BaseNotifyValidationModel.cs" />
+    <Compile Include="BaseVisibilityConverter.cs" />
+    <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="CalloutWindow.xaml.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="Scene2DButton.xaml.cs">
       <DependentUpon>Scene2DButton.xaml</DependentUpon>
     </Compile>
@@ -124,6 +129,7 @@
     <Compile Include="Scene3DObjLoader.cs" />
     <Compile Include="Scene3DText.cs" />
     <Compile Include="SynchronizationContextAwaiter.cs" />
+    <Compile Include="UiThreadManager.cs" />
     <Page Include="CalloutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

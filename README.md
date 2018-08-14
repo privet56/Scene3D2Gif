@@ -31,5 +31,5 @@
 ## TODO:
 	Update helix to get support vertex color reading
 		( see https://github.com/helix-toolkit/helix-toolkit/issues/885 )
-	Impl ScreenToGif functionality
-
+	Save/Load window size+pos on Startup/Shutdown
+	Implement Animated Gif functionality
