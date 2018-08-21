@@ -36,13 +36,13 @@ namespace Scene3DLib
                 ifile++;
             }
             string[] files = Directory.GetFiles(tempDir);
-            Debug.WriteLine("unzipped "+ inFiles.Length+ " ZIP files into '" + tempDir + "' (in sum "+ files.Length + " files found)");
+            Logger.inf("unzipped "+ inFiles.Length+ " ZIP files into '" + tempDir + "' (in sum "+ files.Length + " files found)");
 
             Random rnd = new Random();
             string[] MyRandomArray = files.OrderBy(x => rnd.Next()).ToArray();
             int createdZIPs = Zips(files, outDir, tempDir);
             emptyDir(tempDir);
-            Debug.WriteLine("FINISH ... (CREATED ZIPS:" + createdZIPs + ")");
+            Logger.inf("FINISH ... (CREATED ZIPS:" + createdZIPs + ")");
         }
 
         private void checkParams(string inDir, string tempDir, string outDir)
@@ -51,20 +51,26 @@ namespace Scene3DLib
                 string.IsNullOrWhiteSpace(tempDir) ||
                 string.IsNullOrWhiteSpace(outDir))
             {
-                throw new InvalidOperationException("missing params in("+inDir+"), tempDir("+tempDir+"), outDir("+outDir+")");
+                string s = "missing params in(" + inDir + "), tempDir(" + tempDir + "), outDir(" + outDir + ")";
+                Logger.err(s);
+                throw new InvalidOperationException(s);
             }
             if( (inDir.Length   < 5) ||
                 (tempDir.Length < 5) ||
                 (outDir.Length  < 5))
             {
-                throw new InvalidOperationException("invalid params in(" + inDir + "), tempDir(" + tempDir + "), outDir(" + outDir + ")");
+                string s = "invalid params in(" + inDir + "), tempDir(" + tempDir + "), outDir(" + outDir + ")";
+                Logger.err(s);
+                throw new InvalidOperationException(s);
             }
 
             if( !Directory.Exists(inDir)    ||
                 !Directory.Exists(tempDir) ||
                 !Directory.Exists(outDir))
             {
-                throw new InvalidOperationException("invalid params (dirnf) in(" + inDir + "), tempDir(" + tempDir + "), outDir(" + outDir + ")");
+                string s = "invalid params (dirnf) in(" + inDir + "), tempDir(" + tempDir + "), outDir(" + outDir + ")";
+                Logger.err(s);
+                throw new InvalidOperationException(s);
             }
         }
 
@@ -81,7 +87,8 @@ namespace Scene3DLib
             {
                 File.Delete(file);
             }
-            Debug.WriteLine("dir '" + dir + "' emptied (deleted files: "+files.Length+")");
+            if(files.Length > 0)
+                Logger.inf("dir '" + dir + "' emptied (deleted files: "+files.Length+")");
         }
 
         private int Zips(string[] files, string outDir, string tempDir)
@@ -101,7 +108,7 @@ namespace Scene3DLib
                 if(size4AZip >= GB_2_2)
                 {
                     Zip(files4AZip, outDir + "/vvv.r."+ zipCounter+".sys_", tempDir);
-                    Debug.WriteLine("ZIP file '" + outDir + "/vvv.r." + zipCounter + ".sys_" + "' created (content: "+ files4AZip.Count+" files)");
+                    Logger.inf("ZIP file '" + outDir + "/vvv.r." + zipCounter + ".sys_" + "' created (content: "+ files4AZip.Count+" files)");
                     zipCounter++;
                     size4AZip = 0;
                     files4AZip.Clear();
@@ -109,7 +116,7 @@ namespace Scene3DLib
             }
             {   //rest...
                 Zip(files4AZip, outDir + "/vvv.r." + zipCounter + ".sys_", tempDir);
-                Debug.WriteLine("ZIP file '" + outDir + "/vvv.r." + zipCounter + ".sys_" + "' created (content: " + files4AZip.Count + " files) (last zip)");
+                Logger.inf("ZIP file '" + outDir + "/vvv.r." + zipCounter + ".sys_" + "' created (content: " + files4AZip.Count + " files) (last zip)");
                 zipCounter++;
             }
 
@@ -149,7 +156,7 @@ namespace Scene3DLib
 
         private void Unzip(string sAbsFNZip, string tempDir, int ZipIndex, int ZipFilesCount)
         {
-            Debug.WriteLine("start unzipping "+(ZipIndex+1)+"/"+ZipFilesCount+" file:'" + sAbsFNZip + "' into '" + tempDir + "'");
+            Logger.inf("start unzipping "+(ZipIndex+1)+"/"+ZipFilesCount+" file:'" + sAbsFNZip + "' into '" + tempDir + "'");
             //TODO: System.IO.IOException: "Die Datei "d:\temp\rezipper\temp\????" ist bereits vorhanden."
             //System.IO.Compression.ZipFile.ExtractToDirectory(sAbsFNZip, tempDir);
 
@@ -186,7 +193,7 @@ namespace Scene3DLib
             this.emptyDir(tempDir + "/" + SUBDIR2UNCOMPRESS);
             Directory.Delete(tempDir + "/" + SUBDIR2UNCOMPRESS);
 
-            Debug.WriteLine("end   " + (ZipIndex + 1) + "/" + ZipFilesCount + " unzipping file:'" + sAbsFNZip + "' into '" + tempDir + "'");
+            Logger.inf("end   unzipping " + (ZipIndex + 1) + "/" + ZipFilesCount + " file:'" + sAbsFNZip + "' into '" + tempDir + "'");
         }
     }
 }

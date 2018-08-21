@@ -118,6 +118,7 @@
     <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="CalloutWindow.xaml.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Scene2DButton.xaml.cs">
       <DependentUpon>Scene2DButton.xaml</DependentUpon>
     </Compile>
