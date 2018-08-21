@@ -133,6 +133,11 @@ namespace Scene3D2Gif
             }
         }
 
+        public async void rezip(string inDir, string tempDir, string outDir)
+        {
+            new Zipper().Rezip(inDir, tempDir, outDir);
+        }
+
         public async void OnInsertAgain(string scene3DModelObj)
         {
             var _previousCursor = Mouse.OverrideCursor;

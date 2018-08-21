@@ -85,6 +85,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -130,6 +132,7 @@
     <Compile Include="Scene3DText.cs" />
     <Compile Include="SynchronizationContextAwaiter.cs" />
     <Compile Include="UiThreadManager.cs" />
+    <Compile Include="Zipper.cs" />
     <Page Include="CalloutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
