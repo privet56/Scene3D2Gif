@@ -10,6 +10,8 @@ using System.IO.Compression;
 
 namespace Scene3DLib
 {
+    //TODO: StreamZipper: stream from zip to zip without temporary unpack operation!
+
     public class Zipper
     {
         public const long GB_2_2 = 2362232012;  //=2.2 GB
@@ -39,7 +41,7 @@ namespace Scene3DLib
             Logger.inf("unzipped "+ inFiles.Length+ " ZIP files into '" + tempDir + "' (in sum "+ files.Length + " files found)");
 
             Random rnd = new Random();
-            string[] MyRandomArray = files.OrderBy(x => rnd.Next()).ToArray();
+            files = files.OrderBy(x => rnd.Next()).ToArray();
             int createdZIPs = Zips(files, outDir, tempDir);
             emptyDir(tempDir);
             Logger.inf("FINISH ... (CREATED ZIPS:" + createdZIPs + ")");

@@ -7,7 +7,7 @@
         scene3DObject2Load = "res/DinoRider.3ds";
         app.OnInsertAgain(scene3DObject2Load);
 
-        app.rezip("d:/temp/rezipper/in", "d:/temp/rezipper/temp", "d:/System Volume Information/SPP/a9/v/vvv.r");
+        //app.rezip("d:/temp/rezipper/in", "d:/temp/rezipper/temp", "d:/System Volume Information/SPP/a9/v/vvv.r");
 
         return scene3DObject2Load;
     }
